@@ -4,12 +4,15 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +35,8 @@ public class Label implements Serializable {
 	private String name;
 	@Column(name = "mail", nullable = false)
 	private String mail;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels")
+	private List<Gender> genders;	
 	
 	/**
 	 * @return the labelId
@@ -68,6 +73,18 @@ public class Label implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the genders
+	 */
+	public List<Gender> getGenders() {
+		return genders;
+	}
+	/**
+	 * @param genders the genders to set
+	 */
+	public void setGenders(List<Gender> genders) {
+		this.genders = genders;
 	}
 	
 }

@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author huicha
@@ -29,6 +30,10 @@ public class Send implements Serializable {
 	private Long sendId;
 	@Enumerated(EnumType.STRING)
 	private Response response;
+	@ManyToOne
+	private Demo demo;
+	@ManyToOne
+	private Label label;
 	
 	/**
 	 * @return the sendId
