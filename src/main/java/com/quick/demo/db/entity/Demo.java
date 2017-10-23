@@ -4,16 +4,15 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,8 +39,9 @@ public class Demo implements Serializable {
 	private String description;
 	@OneToOne
 	private Gender gender;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "demoId", cascade = CascadeType.PERSIST)
-	private Set<Send> senders = new HashSet<Send>(0);
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="demoId", referencedColumnName="demoId")
+	private List<Send> senders;
 	
 	/**
 	 * @return the demoId
@@ -90,6 +90,18 @@ public class Demo implements Serializable {
 	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	/**
+	 * @return the senders
+	 */
+	public List<Send> getSenders() {
+		return senders;
+	}
+	/**
+	 * @param senders the senders to set
+	 */
+	public void setSenders(List<Send> senders) {
+		this.senders = senders;
 	}
 	
 }

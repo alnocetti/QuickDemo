@@ -34,7 +34,7 @@ public class Gender implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "genders")
-	private List<Label> label;
+	private List<Label> labels;
 	
 	/**
 	 * @return the genderId
@@ -61,16 +61,16 @@ public class Gender implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the label
+	 * @return the labels
 	 */
-	public List<Label> getLabel() {
-		return label;
+	public List<Label> getLabels() {
+		return labels;
 	}
 	/**
-	 * @param label the label to set
+	 * @param labels the labels to set
 	 */
-	public void setLabel(List<Label> label) {
-		this.label = label;
+	public void setLabels(List<Label> labels) {
+		this.labels = labels;
 	}
 	
 }

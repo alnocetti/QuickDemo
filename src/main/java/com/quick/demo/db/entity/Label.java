@@ -6,12 +6,15 @@ package com.quick.demo.db.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -35,7 +38,13 @@ public class Label implements Serializable {
 	private String name;
 	@Column(name = "mail", nullable = false)
 	private String mail;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "labels")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "label_gender", joinColumns = {
+				@JoinColumn(name = "labelId", nullable = false, updatable = false) 
+			},
+			inverseJoinColumns = { 
+				@JoinColumn(name = "genderId", nullable = false, updatable = false) 
+			})
 	private List<Gender> genders;	
 	
 	/**
