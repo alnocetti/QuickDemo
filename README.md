@@ -1,9 +1,11 @@
 # QuickDemo
 
-Instalar Eclipse
-Instalar gradle
-Instalar Java1.8
-Instalar Mysql
+## Requeriments
+
+* Instalar Eclipse
+* Instalar gradle
+* Instalar Java1.8
+* Instalar Mysql
 
 Para correr el proyecto desde la carpeta y la consola correr el siguiente comando
 
