@@ -20,9 +20,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findOne(Integer id) {
+	public User findOne(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return accountsRepo.findOne(id);
 	}
 
 	@Override
@@ -44,9 +44,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+	public void deleteById(Long id) {
+		accountsRepo.delete(id);
 	}
 
 	@Override

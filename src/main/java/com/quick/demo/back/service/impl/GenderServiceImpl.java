@@ -19,8 +19,14 @@ public class GenderServiceImpl implements GenderService{
 	}
 
 	@Override
-	public void removeGender(Long valueOf) {
+	public void deleteById(Long valueOf) {
 		genderRepository.delete(valueOf);
+	}
+
+	@Override
+	public Gender findOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

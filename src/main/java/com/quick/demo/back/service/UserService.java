@@ -17,7 +17,7 @@ public interface UserService {
 	 * @param id
 	 * @return User
 	 */
-	public User findOne(Integer id);
+	public User findOne(Long id);
 	
 	/**
 	 * Gets an Accounts by its userAlias and aliasType.
@@ -46,7 +46,7 @@ public interface UserService {
 	 * Delete an account by your id.
 	 * @param id
 	 */
-	public void deleteById(Integer id);
+	public void deleteById(Long id);
 	
 	
 	/**

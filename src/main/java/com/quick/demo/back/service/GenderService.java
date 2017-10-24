@@ -13,6 +13,8 @@ public interface GenderService {
 
 	public void createGender(Gender gender);
 
-	public void removeGender(Long valueOf);
+	public void deleteById(Long valueOf);
+	
+	public Gender findOne(Long id);
 	
 }

@@ -13,33 +13,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quick.demo.back.service.GenderService;
-import com.quick.demo.db.entity.Gender;
-import com.quick.demo.db.entity.dto.GenderDTO;
+import com.quick.demo.back.service.CoverService;
+import com.quick.demo.db.entity.Cover;
+import com.quick.demo.db.entity.dto.CoverDTO;
 
 @RestController
-@RequestMapping("/api/genders")
-public class GenderController {
+@RequestMapping("/api/cover")
+public class CoverController {
 
 	@Autowired
-	private GenderService genderService;
+	private CoverService coverService;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createNewCategory(GenderDTO categoryDTO) {
-		Gender gender = new Gender();
-		gender.setName(categoryDTO.getName());
-		genderService.createGender(gender);
-		return Response.status(201).entity(categoryDTO).build();
+	public Response createNewCategory(CoverDTO coverDTO) {
+		Cover cover = new Cover();
+		cover.setName(coverDTO.getName());
+		cover.setImagePath(coverDTO.getImagePath());
+		coverService.createCover(cover);
+		return Response.status(201).entity(coverDTO).build();
 	}
 
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") String id) {
-		System.out.println("Get gender with id: " + id);
-		genderService.deleteById(Long.valueOf(id));
-		return Response.status(200).entity("Gender removed").build();
+		System.out.println("Get cover with id: " + id);
+		coverService.deleteById(Long.valueOf(id));
+		return Response.status(200).entity("Cover removed").build();
 	}
 	
 }
