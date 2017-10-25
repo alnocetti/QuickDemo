@@ -1,5 +1,7 @@
 package com.quick.demo.back.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,17 @@ public class LabelServiceImpl implements LabelService {
 
 	@Override
 	public Label findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return labelRepository.findOne(id);
+	}
+
+	@Override
+	public List<Label> allLabels() {
+		return labelRepository.findAll();
+	}
+
+	@Override
+	public void createLabel(Label label) {
+		labelRepository.saveAndFlush(label);
 	}
 	
 }

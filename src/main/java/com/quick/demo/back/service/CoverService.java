@@ -3,6 +3,8 @@
  */
 package com.quick.demo.back.service;
 
+import java.util.List;
+
 import com.quick.demo.db.entity.Cover;
 
 /**
@@ -16,5 +18,7 @@ public interface CoverService {
 	public Cover findOne(Long id);
 
 	public void deleteById(Long valueOf);
+
+	public List<Cover> allCovers();
 
 }

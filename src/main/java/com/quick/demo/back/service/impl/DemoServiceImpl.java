@@ -1,5 +1,7 @@
 package com.quick.demo.back.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,17 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public Demo findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return demoRepository.findOne(id);
+	}
+
+	@Override
+	public List<Demo> allDemos() {
+		return demoRepository.findAll();
+	}
+
+	@Override
+	public void createDemo(Demo demo) {
+		demoRepository.saveAndFlush(demo);
 	}
 	
 }

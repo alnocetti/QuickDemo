@@ -1,5 +1,7 @@
 package com.quick.demo.back.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,12 @@ public class GenderServiceImpl implements GenderService{
 
 	@Override
 	public Gender findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return genderRepository.findOne(id);
+	}
+
+	@Override
+	public List<Gender> allGenders() {
+		return genderRepository.findAll();
 	}
 	
 }

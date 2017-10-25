@@ -3,6 +3,8 @@
  */
 package com.quick.demo.back.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,12 @@ public class CoverServiceImpl implements CoverService {
 
 	@Override
 	public Cover findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return coverRepository.findOne(id);
+	}
+
+	@Override
+	public List<Cover> allCovers() {
+		return coverRepository.findAll();
 	}
 
 }

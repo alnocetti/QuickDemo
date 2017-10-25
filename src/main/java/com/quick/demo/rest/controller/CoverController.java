@@ -1,16 +1,15 @@
 package com.quick.demo.rest.controller;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.CoverService;
@@ -24,23 +23,42 @@ public class CoverController {
 	@Autowired
 	private CoverService coverService;
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response createNewCategory(CoverDTO coverDTO) {
+	@RequestMapping(value = "",
+            method = RequestMethod.GET,
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody List<Cover> getCovers() {
+		return coverService.allCovers();
+	}
+	
+	@RequestMapping(value = "/{id}",
+	    method = RequestMethod.GET,
+	    produces = {"application/json"})
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody Cover getCover(@PathVariable("id") Long id) {
+		System.out.println("Get cover with id: " + id);
+		return this.coverService.findOne(id);
+	}
+	
+	@RequestMapping(value = "",
+            method = RequestMethod.POST,
+            consumes = {"application/json"},
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+	public void createCover(@RequestBody CoverDTO coverDTO) {
 		Cover cover = new Cover();
 		cover.setName(coverDTO.getName());
 		cover.setImagePath(coverDTO.getImagePath());
 		coverService.createCover(cover);
-		return Response.status(201).entity(coverDTO).build();
 	}
 
-	@DELETE
-	@Path("{id}")
-	public Response delete(@PathParam("id") String id) {
-		System.out.println("Get cover with id: " + id);
-		coverService.deleteById(Long.valueOf(id));
-		return Response.status(200).entity("Cover removed").build();
+	@RequestMapping(value = "/{id}",
+            method = RequestMethod.DELETE,
+            produces = {"application/json"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable("id") Long id) {
+		System.out.println("Delete cover with id: " + id);
+		coverService.deleteById(id);
 	}
 	
 }
