@@ -47,6 +47,10 @@ public class Cover implements Serializable {
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
 	private List<Demo> demos;
 	
+	public Cover() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the creationDate
 	 */

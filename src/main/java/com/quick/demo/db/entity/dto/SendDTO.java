@@ -14,6 +14,10 @@ public class SendDTO {
 	private Long demoId;
 	private Long labelId;
 	
+	public SendDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * @return the sendId
 	 */

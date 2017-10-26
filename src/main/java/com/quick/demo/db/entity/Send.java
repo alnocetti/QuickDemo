@@ -48,6 +48,10 @@ public class Send implements Serializable {
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	
+	public Send() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the demo
 	 */

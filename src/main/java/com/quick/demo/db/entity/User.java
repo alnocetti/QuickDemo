@@ -50,6 +50,10 @@ public class User implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "demoId", cascade = CascadeType.PERSIST)
 	private Set<Demo> demos = new HashSet<Demo>(0);
 	
+	public User() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the lastName
 	 */

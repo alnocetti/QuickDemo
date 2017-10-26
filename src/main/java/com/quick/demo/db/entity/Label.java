@@ -53,6 +53,10 @@ public class Label implements Serializable {
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	
+	public Label() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the creationDate
 	 */

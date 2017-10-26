@@ -20,6 +20,10 @@ public class LabelDTO {
 	private String mail;
 	private List<Long> genders;
 	
+	public LabelDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public LabelDTO(Label label) {
 		this.setLabelId(label.getLabelId());
 		this.setName(label.getName());

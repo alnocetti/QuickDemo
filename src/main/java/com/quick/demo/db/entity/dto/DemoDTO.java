@@ -23,6 +23,10 @@ public class DemoDTO {
 	private Long coverId;
 	private List<Long> senders;
 	
+	public DemoDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public DemoDTO(Demo demo) {
 		this.setCoverId(demo.getDemoId());
 		this.setName(demo.getName());

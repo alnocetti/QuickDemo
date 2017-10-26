@@ -20,6 +20,10 @@ public class UserDTO {
 	private Date creationDate;
 	private List<Long> demos;
 	
+	public UserDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * @return the lastName
 	 */

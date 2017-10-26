@@ -20,6 +20,10 @@ public class CoverDTO {
 	private String name;
 	private List<Long> demos;
 	
+	public CoverDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public CoverDTO(Cover cover) {
 		this.setCoverId(cover.getCoverId());
 		this.setImagePath(cover.getImagePath());

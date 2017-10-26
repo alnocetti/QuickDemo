@@ -55,6 +55,10 @@ public class Demo implements Serializable {
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
 	private Cover cover; 
 	
+	public Demo() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the creationDate
 	 */

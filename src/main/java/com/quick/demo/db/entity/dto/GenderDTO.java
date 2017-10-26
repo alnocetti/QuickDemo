@@ -19,6 +19,10 @@ public class GenderDTO {
 	private String name;
 	private List<Long> labels;
 	
+	public GenderDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public GenderDTO(Gender gender) {
 		this.setGenderId(gender.getGenderId());
 		this.setName(gender.getName());

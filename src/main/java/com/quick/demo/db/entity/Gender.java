@@ -42,6 +42,10 @@ public class Gender implements Serializable {
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	
+	public Gender() {
+		this.creationDate = new Date();
+	}
+	
 	/**
 	 * @return the creationDate
 	 */
