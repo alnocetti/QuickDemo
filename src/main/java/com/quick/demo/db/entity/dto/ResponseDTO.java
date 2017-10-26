@@ -7,6 +7,6 @@ package com.quick.demo.db.entity.dto;
  * @author huicha
  *
  */
-public enum Response {
+public enum ResponseDTO {
 
 }

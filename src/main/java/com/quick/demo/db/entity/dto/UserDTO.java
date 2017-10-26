@@ -4,8 +4,7 @@
 package com.quick.demo.db.entity.dto;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author huicha
@@ -19,7 +18,7 @@ public class UserDTO {
 	private String nick;
 	private Date birthday;
 	private Date creationDate;
-	private Set<DemoDTO> demos = new HashSet<DemoDTO>(0);
+	private List<Long> demos;
 	
 	/**
 	 * @return the lastName
@@ -96,13 +95,13 @@ public class UserDTO {
 	/**
 	 * @return the demos
 	 */
-	public Set<DemoDTO> getDemos() {
+	public List<Long> getDemos() {
 		return demos;
 	}
 	/**
 	 * @param demos the demos to set
 	 */
-	public void setDemos(Set<DemoDTO> demos) {
+	public void setDemos(List<Long> demos) {
 		this.demos = demos;
 	}
 	

@@ -3,6 +3,8 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.List;
+
 /**
  * @author huicha
  *
@@ -12,8 +14,47 @@ public class DemoDTO {
 	private Long demoId;
 	private String name;
 	private String description;
-	private GenderDTO gender;
+	private String filepath;
+	private Long genderId;
+	private Long coverId;
+	private List<Long> senders;
 	
+	/**
+	 * @return the filepath
+	 */
+	public String getFilepath() {
+		return filepath;
+	}
+	/**
+	 * @param filepath the filepath to set
+	 */
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+	/**
+	 * @return the coverId
+	 */
+	public Long getCoverId() {
+		return coverId;
+	}
+	/**
+	 * @param coverId the coverId to set
+	 */
+	public void setCoverId(Long coverId) {
+		this.coverId = coverId;
+	}
+	/**
+	 * @return the senders
+	 */
+	public List<Long> getSenders() {
+		return senders;
+	}
+	/**
+	 * @param senders the senders to set
+	 */
+	public void setSenders(List<Long> senders) {
+		this.senders = senders;
+	}
 	/**
 	 * @return the demoId
 	 */
@@ -51,16 +92,16 @@ public class DemoDTO {
 		this.description = description;
 	}
 	/**
-	 * @return the gender
+	 * @return the genderId
 	 */
-	public GenderDTO getGender() {
-		return gender;
+	public Long getGenderId() {
+		return genderId;
 	}
 	/**
-	 * @param gender the gender to set
+	 * @param genderId the genderId to set
 	 */
-	public void setGender(GenderDTO gender) {
-		this.gender = gender;
+	public void setGenderId(Long genderId) {
+		this.genderId = genderId;
 	}
 	
 }

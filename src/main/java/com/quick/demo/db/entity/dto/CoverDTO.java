@@ -3,6 +3,8 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.List;
+
 /**
  * @author huicha
  *
@@ -12,6 +14,7 @@ public class CoverDTO {
 	private Long coverId;
 	private String imagePath;
 	private String name;
+	private List<Long> demos;
 	
 	/**
 	 * @return the coverId
@@ -48,6 +51,18 @@ public class CoverDTO {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the demos
+	 */
+	public List<Long> getDemos() {
+		return demos;
+	}
+	/**
+	 * @param demos the demos to set
+	 */
+	public void setDemos(List<Long> demos) {
+		this.demos = demos;
 	}
 	
 }

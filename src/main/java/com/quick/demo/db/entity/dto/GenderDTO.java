@@ -3,6 +3,8 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.List;
+
 /**
  * @author huicha
  *
@@ -11,6 +13,7 @@ public class GenderDTO {
 
 	private Long genderId;
 	private String name;
+	private List<Long> labels;
 	
 	/**
 	 * @return the genderId
@@ -35,6 +38,18 @@ public class GenderDTO {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the labels
+	 */
+	public List<Long> getLabels() {
+		return labels;
+	}
+	/**
+	 * @param labels the labels to set
+	 */
+	public void setLabels(List<Long> labels) {
+		this.labels = labels;
 	}
 	
 }
