@@ -3,7 +3,11 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.quick.demo.db.entity.Demo;
+import com.quick.demo.db.entity.Send;
 
 /**
  * @author huicha
@@ -19,6 +23,19 @@ public class DemoDTO {
 	private Long coverId;
 	private List<Long> senders;
 	
+	public DemoDTO(Demo demo) {
+		this.setCoverId(demo.getDemoId());
+		this.setName(demo.getName());
+		this.setDescription(demo.getFilepath());
+		this.setFilepath(demo.getFilepath());
+		this.setGenderId(demo.getGender().getGenderId());
+		this.setCoverId(demo.getCover().getCoverId());
+		List<Long> ids = new ArrayList<Long>();
+		for (Send send : demo.getSenders()){
+			ids.add(send.getSendId());
+		}
+		this.setSenders(ids);
+	}
 	/**
 	 * @return the filepath
 	 */

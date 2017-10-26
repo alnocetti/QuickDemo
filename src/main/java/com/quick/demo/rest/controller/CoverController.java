@@ -1,5 +1,6 @@
 package com.quick.demo.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,23 @@ public class CoverController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Cover> getCovers() {
-		return coverService.allCovers();
+    public @ResponseBody List<CoverDTO> getCovers() {
+		List<Cover> covers = coverService.allCovers();
+		List<CoverDTO> coversDTO = new ArrayList<CoverDTO>();
+		for (Cover cover : covers){
+			coversDTO.add(new CoverDTO(cover));
+		}
+		return coversDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Cover getCover(@PathVariable("id") Long id) {
+	public @ResponseBody CoverDTO getCover(@PathVariable("id") Long id) {
 		System.out.println("Get cover with id: " + id);
-		return this.coverService.findOne(id);
+		Cover cover = this.coverService.findOne(id);
+		return new CoverDTO(cover);
 	}
 	
 	@RequestMapping(value = "",

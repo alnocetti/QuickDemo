@@ -3,7 +3,11 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.quick.demo.db.entity.Cover;
+import com.quick.demo.db.entity.Demo;
 
 /**
  * @author huicha
@@ -16,6 +20,16 @@ public class CoverDTO {
 	private String name;
 	private List<Long> demos;
 	
+	public CoverDTO(Cover cover) {
+		this.setCoverId(cover.getCoverId());
+		this.setImagePath(cover.getImagePath());
+		this.setName(cover.getName());
+		List<Long> ids = new ArrayList<Long>();
+		for (Demo demo : cover.getDemos()){
+			ids.add(demo.getDemoId());
+		}
+		this.setDemos(ids);
+	}
 	/**
 	 * @return the coverId
 	 */

@@ -1,5 +1,6 @@
 package com.quick.demo.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,13 @@ public class DemoController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Demo> getDemos() {
-		return demoService.allDemos();
+    public @ResponseBody List<DemoDTO> getDemos() {
+		List<Demo> demos = demoService.allDemos();
+		List<DemoDTO> demosDTO = new ArrayList<DemoDTO>();
+		for (Demo demo : demos){
+			demosDTO.add(new DemoDTO(demo));
+		}
+		return demosDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",
