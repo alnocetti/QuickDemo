@@ -1,5 +1,6 @@
 package com.quick.demo.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,23 @@ public class GenderController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Gender> getGenders() {
-		return genderService.allGenders();
+    public @ResponseBody List<GenderDTO> getGenders() {
+		List<Gender> genders = genderService.allGenders();
+		List<GenderDTO> gendersDTO = new ArrayList<GenderDTO>();
+		for (Gender gender : genders){
+			gendersDTO.add(new GenderDTO(gender));
+		}
+		return gendersDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Gender getGender(@PathVariable("id") Long id) {
+	public @ResponseBody GenderDTO getGender(@PathVariable("id") Long id) {
 		System.out.println("Get gender with id: " + id);
-		return genderService.findOne(id);
+		Gender gender = genderService.findOne(id);
+		return new GenderDTO(gender);
 	}
 	
 	@RequestMapping(value = "",

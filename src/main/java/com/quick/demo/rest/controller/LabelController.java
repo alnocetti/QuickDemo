@@ -1,5 +1,6 @@
 package com.quick.demo.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,13 @@ public class LabelController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Label> getLabels() {
-		return labelService.allLabels();
+    public @ResponseBody List<LabelDTO> getLabels() {
+		List<Label> labels = labelService.allLabels();
+		List<LabelDTO> labelsDTO = new ArrayList<LabelDTO>();
+		for (Label label : labels){
+			labelsDTO.add(new LabelDTO(label));
+		}
+		return labelsDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",

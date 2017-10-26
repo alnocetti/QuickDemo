@@ -3,7 +3,11 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.quick.demo.db.entity.Gender;
+import com.quick.demo.db.entity.Label;
 
 /**
  * @author huicha
@@ -16,6 +20,16 @@ public class LabelDTO {
 	private String mail;
 	private List<Long> genders;
 	
+	public LabelDTO(Label label) {
+		this.setLabelId(label.getLabelId());
+		this.setName(label.getName());
+		this.setMail(label.getMail());
+		List<Long> ids = new ArrayList<Long>();
+		for (Gender gender : label.getGenders()){
+			ids.add(gender.getGenderId());
+		}
+		this.setGenders(ids);
+	}
 	/**
 	 * @return the labelId
 	 */

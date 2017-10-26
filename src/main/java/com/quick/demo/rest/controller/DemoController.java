@@ -41,9 +41,10 @@ public class DemoController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Demo getDemo(@PathVariable("id") Long id) {
+	public @ResponseBody DemoDTO getDemo(@PathVariable("id") Long id) {
 		System.out.println("Get demo with id: " + id);
-		return demoService.findOne(id);
+		Demo demo = demoService.findOne(id);
+		return new DemoDTO(demo);
 	}
 	
 	@RequestMapping(value = "",
@@ -51,7 +52,7 @@ public class DemoController {
             consumes = {"application/json"},
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-	public void createCover(@RequestBody DemoDTO demoDTO) {
+	public void createDemo(@RequestBody DemoDTO demoDTO) {
 		Demo demo = new Demo();
 		demo.setDescription(demoDTO.getDescription());
 		demo.setName(demoDTO.getName());
