@@ -4,6 +4,7 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author huicha
@@ -42,6 +45,9 @@ public class Demo implements Serializable {
 	private String filepath;
 	@OneToOne
 	private Gender gender;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false, length = 19)
+	private Date creationDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private List<Send> senders;
@@ -49,6 +55,18 @@ public class Demo implements Serializable {
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
 	private Cover cover; 
 	
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	/**
 	 * @return the filepath
 	 */

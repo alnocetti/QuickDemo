@@ -4,6 +4,7 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author huicha
@@ -41,7 +44,46 @@ public class Send implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="labelId", referencedColumnName="labelId")
 	private Label label;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false, length = 19)
+	private Date creationDate;
 	
+	/**
+	 * @return the demo
+	 */
+	public Demo getDemo() {
+		return demo;
+	}
+	/**
+	 * @param demo the demo to set
+	 */
+	public void setDemo(Demo demo) {
+		this.demo = demo;
+	}
+	/**
+	 * @return the label
+	 */
+	public Label getLabel() {
+		return label;
+	}
+	/**
+	 * @param label the label to set
+	 */
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	/**
 	 * @return the sendId
 	 */

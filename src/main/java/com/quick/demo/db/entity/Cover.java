@@ -4,6 +4,7 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author huicha
@@ -37,10 +40,25 @@ public class Cover implements Serializable {
 	private String imagePath;
 	@Column(nullable = false)
 	private String name;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false, length = 19)
+	private Date creationDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
 	private List<Demo> demos;
 	
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	/**
 	 * @return the coverId
 	 */

@@ -4,6 +4,7 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author huicha
@@ -46,7 +49,22 @@ public class Label implements Serializable {
 				@JoinColumn(name = "genderId", nullable = false, updatable = false) 
 			})
 	private List<Gender> genders;	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false, length = 19)
+	private Date creationDate;
 	
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	/**
 	 * @return the labelId
 	 */
