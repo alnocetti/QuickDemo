@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Quickdemo</title>
+    <link rel="stylesheet" href="/main.css" />
+    <script src="http://localhost:8080/auth/js/keycloak.js"></script>
+	<script type="application/javascript">
+	        var keycloak = Keycloak({
+			    url: 'http://localhost:8080/auth',
+			    realm: 'quickdemo.com',
+			    clientId: 'sso'
+			});
+	        keycloak.init({ onLoad: 'login-required' }).success(function(authenticated) {
+	            alert(authenticated ? 'authenticated' : 'not authenticated');
+				localStorage.setItem("algo", authenticated);
+	        }).error(function() {
+	            alert('failed to initialize');
+	        });
+	</script>
+</head>
+<body>
+	<form>
+		<button onclick="login()">Click me</button>
+	</form>
+</body>
+</html>	
