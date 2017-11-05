@@ -30,6 +30,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
+	
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
 
 	// https://mvnrepository.com/artifact/org.springframework/spring-webmvc

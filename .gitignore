@@ -4,7 +4,7 @@
 *.class
 *.sm
 
-.gradle/
+.gradle
 .metadata/
 .recommenders/
 .DS_Store
@@ -14,6 +14,7 @@
 .classpath/
 
 # Ignore `bin` dir
+
 bin/
 # or
 **/bin/
@@ -22,6 +23,7 @@ bin/
 **/build/
 **/build/*
 
+*.bin
 *.war
 *.ear
 *.jar
