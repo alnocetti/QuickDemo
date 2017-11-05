@@ -3,8 +3,17 @@
  */
 package com.quick.demo.web.controller;
 
+import java.security.Principal;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author cristianhuichaqueo
@@ -13,29 +22,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexWebController {
 
-	@RequestMapping("/")
-    public String home() {
-        return dashboard();
-    }
+	@Value("${accountUrl}")
+	private String accountUrl;
 	
-	@RequestMapping("/demo")
-    public String demo() {
-        return "/views/demo";
-    }
+	@GetMapping(path = "/")
+	public ModelAndView index(Principal principal) {		
+		if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+			return  new ModelAndView("index");
+		}else{			
+			return new ModelAndView("redirect:/uploadDemo");	
+		}	
+	}
 	
-	@RequestMapping("/dashboards-project")
-    public String dashboard() {
-        return "/views/dashboards-project";
-    }
-	
-	@RequestMapping("/users")
-    public String users() {
-        return "/views/users";
-    }
+	@GetMapping(path = "/uploadDemo")
+	public String uploadDemoWizard(Principal principal) {		
+		return "/views/uploadDemo";
+	}
 	
 	@RequestMapping("/profile")
     public String profile() {
         return "/views/profile";
     }
 	
+	@GetMapping(path = "/logout")
+	public String logout(HttpServletRequest request) throws ServletException {
+		request.logout();
+		return "/";
+	}
+
+	@GetMapping(path = "/account")
+	public String account(HttpServletRequest request) throws ServletException {
+		return "redirect:"+accountUrl;
+	}
+    
+    @GetMapping(path = "/password")
+   	public String password(HttpServletRequest request) throws ServletException {
+    	return "redirect:"+accountUrl + "password?attribute=redirectWithRedirectView";
+   	}
+    
+    @GetMapping(path = "/identify")
+   	public String identifyProvider(HttpServletRequest request) throws ServletException {
+    	return "redirect:"+accountUrl + "identify";
+   	}
+    
 }

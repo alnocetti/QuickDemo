@@ -27,62 +27,60 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
- class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
-{
-   /** 
-    * Registers the KeycloakAuthenticationProvider with the authentication manager.
-    */
-   @Autowired
-   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-      KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
-      keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
-      auth.authenticationProvider(keycloakAuthenticationProvider);
-   }
-   
-   @Bean
-   public KeycloakConfigResolver KeycloakConfigResolver() {
-      return new KeycloakSpringBootConfigResolver();
-   }
-   /**
-    * Defines the session authentication strategy.
-    */
-   @Bean
-   @Override
-   protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-      return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
-   }
-   
-   @Autowired
-   public KeycloakClientRequestFactory keycloakClientRequestFactory;
+class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
+	/**
+	 * Registers the KeycloakAuthenticationProvider with the authentication
+	 * manager.
+	 */
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		KeycloakAuthenticationProvider keycloakAuthenticationProvider = keycloakAuthenticationProvider();
+		keycloakAuthenticationProvider.setGrantedAuthoritiesMapper(new SimpleAuthorityMapper());
+		auth.authenticationProvider(keycloakAuthenticationProvider);
+	}
 
-   @Bean
-   @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-   public KeycloakRestTemplate keycloakRestTemplate() {
-       return new KeycloakRestTemplate(keycloakClientRequestFactory);
-   }
-   
-   @Bean
-   public FilterRegistrationBean keycloakAuthenticationProcessingFilterRegistrationBean(
-           KeycloakAuthenticationProcessingFilter filter) {
-       FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-       registrationBean.setEnabled(false);
-       return registrationBean;
-   }
+	@Bean
+	public KeycloakConfigResolver KeycloakConfigResolver() {
+		return new KeycloakSpringBootConfigResolver();
+	}
 
-   @Bean
-   public FilterRegistrationBean keycloakPreAuthActionsFilterRegistrationBean(
-           KeycloakPreAuthActionsFilter filter) {
-       FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-       registrationBean.setEnabled(false);
-       return registrationBean;
-   }
+	/**
+	 * Defines the session authentication strategy.
+	 */
+	@Bean
+	@Override
+	protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+		return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
+	}
 
-   @Override
-   protected void configure(HttpSecurity http) throws Exception
-   {
-      super.configure(http);
-      http
-            .authorizeRequests()
-            .anyRequest().permitAll();
-   }
+	@Autowired
+	public KeycloakClientRequestFactory keycloakClientRequestFactory;
+
+	@Bean
+	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public KeycloakRestTemplate keycloakRestTemplate() {
+		return new KeycloakRestTemplate(keycloakClientRequestFactory);
+	}
+
+	@Bean
+	public FilterRegistrationBean keycloakAuthenticationProcessingFilterRegistrationBean(
+			KeycloakAuthenticationProcessingFilter filter) {
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
+		registrationBean.setEnabled(false);
+		return registrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean keycloakPreAuthActionsFilterRegistrationBean(KeycloakPreAuthActionsFilter filter) {
+		FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
+		registrationBean.setEnabled(false);
+		return registrationBean;
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		super.configure(http);
+		http.authorizeRequests().antMatchers("/*").hasRole("user").anyRequest().permitAll();
+	}
+
 }

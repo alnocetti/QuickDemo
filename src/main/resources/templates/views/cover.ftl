@@ -15,27 +15,8 @@
                     </button>
                     <div class="toolbar-separator d-block d-lg-none"></div>
                 <div class="shortcuts-wrapper row no-gutters align-items-center px-0 px-sm-2">
-                    <div class="shortcuts row no-gutters align-items-center d-none d-md-flex">
-                        <a href="apps-chat.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-hangouts"></i>
-                        </a>
-                        <a href="apps-contacts.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-account-box"></i>
-                        </a>
-                        <a href="apps-mail.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-email"></i>
-                        </a>
-                    </div>
                     <div class="add-shortcut-menu-button dropdown px-1 px-sm-3">
-
-                        <div class="dropdown-toggle btn btn-icon" role="button"
-                             id="dropdownShortcutMenu"
-                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="icon icon-star text-amber-600"></i>
-                        </div>
-
                         <div class="dropdown-menu" aria-labelledby="dropdownShortcutMenu">
-
                             <a class="dropdown-item" href="#">
                                 <div class="row no-gutters align-items-center justify-content-between flex-nowrap">
                                     <div class="row no-gutters align-items-center flex-nowrap">
@@ -45,7 +26,6 @@
                                     <i class="icon icon-pin s-5 ml-2"></i>
                                 </div>
                             </a>
-
                             <a class="dropdown-item" href="#">
                                 <div class="row no-gutters align-items-center justify-content-between flex-nowrap">
                                     <div class="row no-gutters align-items-center flex-nowrap">
@@ -285,87 +265,6 @@
 
             </tr>
 
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-folder"></i>
-                </td>
-                <td class="name">Public Documents</td>
-                <td class="type d-none d-md-table-cell">folder</td>
-                <td class="owner d-none d-sm-table-cell">public</td>
-                <td class="size d-none d-sm-table-cell"></td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-folder"></i>
-                </td>
-                <td class="name">Private Documents</td>
-                <td class="type d-none d-md-table-cell">folder</td>
-                <td class="owner d-none d-sm-table-cell">me</td>
-                <td class="size d-none d-sm-table-cell"></td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-
-        
-
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-document"></i>
-                </td>
-                <td class="name">Ongoing projects</td>
-                <td class="type d-none d-md-table-cell">document</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">1.2 Mb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-document"></i>
-                </td>
-                <td class="name">Shopping list</td>
-                <td class="type d-none d-md-table-cell">document</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">980 Kb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
 
             <tr>
 
@@ -384,29 +283,7 @@
                 </td>
 
             </tr>
-        
-
             <tr>
-
-                <td class="file-icon">
-                    <i class="icon-document"></i>
-                </td>
-                <td class="name">Crash logs</td>
-                <td class="type d-none d-md-table-cell">document</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">980 Mb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
-
-            <tr>
-
                 <td class="file-icon">
                     <i class="icon-document"></i>
                 </td>
@@ -420,66 +297,7 @@
                         <i class="icon icon-information-outline"></i>
                     </button>
                 </td>
-
             </tr>
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-spreadsheet"></i>
-                </td>
-                <td class="name">Prices</td>
-                <td class="type d-none d-md-table-cell">spreadsheet</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">27 Mb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-document"></i>
-                </td>
-                <td class="name">Anabelle Manual</td>
-                <td class="type d-none d-md-table-cell">document</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">1.1 Kb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
-
-            <tr>
-
-                <td class="file-icon">
-                    <i class="icon-spreadsheet"></i>
-                </td>
-                <td class="name">Steam summer sale budget</td>
-                <td class="type d-none d-md-table-cell">spreadsheet</td>
-                <td class="owner d-none d-sm-table-cell">Emily Bennett</td>
-                <td class="size d-none d-sm-table-cell">505 Kb</td>
-                <td class="last-modified d-none d-lg-table-cell">July 8, 2015</td>
-                <td class="d-table-cell d-xl-none">
-                    <button type="button" class="btn btn-icon" data-fuse-bar-toggle="file-manager-info-sidebar">
-                        <i class="icon icon-information-outline"></i>
-                    </button>
-                </td>
-
-            </tr>
-        
     </tbody>
 </table>
 <!-- / LIST VIEW -->

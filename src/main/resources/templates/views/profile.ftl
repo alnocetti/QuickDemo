@@ -21,38 +21,9 @@
                     </button>
 
                     <div class="toolbar-separator d-block d-lg-none"></div>
-
-                
-
-
                 <div class="shortcuts-wrapper row no-gutters align-items-center px-0 px-sm-2">
-
-                    <div class="shortcuts row no-gutters align-items-center d-none d-md-flex">
-
-                        <a href="apps-chat.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-hangouts"></i>
-                        </a>
-
-                        <a href="apps-contacts.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-account-box"></i>
-                        </a>
-
-                        <a href="apps-mail.html" class="shortcut-button btn btn-icon mx-1">
-                            <i class="icon icon-email"></i>
-                        </a>
-
-                    </div>
-
                     <div class="add-shortcut-menu-button dropdown px-1 px-sm-3">
-
-                        <div class="dropdown-toggle btn btn-icon" role="button"
-                             id="dropdownShortcutMenu"
-                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="icon icon-star text-amber-600"></i>
-                        </div>
-
                         <div class="dropdown-menu" aria-labelledby="dropdownShortcutMenu">
-
                             <a class="dropdown-item" href="#">
                                 <div class="row no-gutters align-items-center justify-content-between flex-nowrap">
                                     <div class="row no-gutters align-items-center flex-nowrap">
@@ -62,7 +33,6 @@
                                     <i class="icon icon-pin s-5 ml-2"></i>
                                 </div>
                             </a>
-
                             <a class="dropdown-item" href="#">
                                 <div class="row no-gutters align-items-center justify-content-between flex-nowrap">
                                     <div class="row no-gutters align-items-center flex-nowrap">
@@ -72,7 +42,6 @@
                                     <i class="icon icon-pin s-5 ml-2"></i>
                                 </div>
                             </a>
-
                             <a class="dropdown-item" href="#">
                                 <div class="row no-gutters align-items-center justify-content-between flex-nowrap">
                                     <div class="row no-gutters align-items-center flex-nowrap">
@@ -82,7 +51,6 @@
                                     <i class="icon icon-pin s-5 ml-2"></i>
                                 </div>
                             </a>
-
                         </div>
                     </div>
                 </div>
