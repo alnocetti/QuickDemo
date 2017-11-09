@@ -4,7 +4,6 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
-  devtool: 'cheap-module-source-map',
   entry: ['./src/index'],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -27,6 +26,7 @@ const config = {
 const production = process.env.NODE_ENV === 'production';
 
 if (production) {
+  config.devtool = 'source-map';
   config.module.rules.push({
     test: /\.css$/,
     use: ExtractTextPlugin.extract({
@@ -41,6 +41,7 @@ if (production) {
   }));
   config.plugins.push(new ExtractTextPlugin('components.css'));
 } else {
+  config.devtool = 'cheap-module-source-map';
   config.devServer = {inline: true};
   config.entry.unshift('webpack-dev-server/client?http://localhost:3000');
   config.module.rules.push({
@@ -49,7 +50,10 @@ if (production) {
       'style-loader?sourceMap',
       'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
     ],
-    include: path.join(__dirname, 'src')
+    include: [
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'node_modules')
+    ]
   });
   config.plugins.push(new DashboardPlugin());
 }
