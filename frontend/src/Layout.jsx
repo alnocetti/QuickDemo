@@ -1,7 +1,8 @@
 import React from 'react';
-import Header from './Header';
+import CSSModules from 'react-css-modules';
+import styles from './Layout.css';
 
-class AppLayout extends React.Component {
+class Layout extends React.Component {
   loading = false;
 
   render() {
@@ -9,21 +10,9 @@ class AppLayout extends React.Component {
       return <span/>;
     }
 
-    const wrapperStyles = {
-      overflowY: 'scroll !important',
-      position: 'absolute',
-      left: 0,
-      right: 0
-    };
-
-    const contentWrapperStyles = {
-      minHeight: 1000
-    };
-
     return (
-      <div className="wrapper" style={wrapperStyles}>
-        <Header/>
-        <div className="content-wrapper" style={contentWrapperStyles}>
+      <div className={`wrapper ${styles.wrapper}`}>
+        <div className="content-wrapper">
           {this.props.children}
         </div>
       </div>
@@ -31,14 +20,4 @@ class AppLayout extends React.Component {
   }
 }
 
-class Layout extends React.Component {
-  render() {
-    return (
-      <AppLayout>
-        {this.props.children}
-      </AppLayout>
-    )
-  }
-}
-
-export default Layout;
+export default CSSModules(Layout, styles);
