@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import TextField from './TextField';
 
 export default class FormStep1 extends React.Component {
   render() {
@@ -16,17 +17,22 @@ export default class FormStep1 extends React.Component {
               </div>
               <div className="row align-items-center">
                 <div className="col mt-4">
-                  <input type="text" className="form-control" placeholder="Your Real Name"/>
+                  <TextField id="real-name" type="text" label="Your Real Name"/>
                 </div>
               </div>
               <div className="row align-items-center">
                 <div className="col mt-4">
-                  <input type="text" className="form-control" placeholder="Your Artist Name"/>
+                  <TextField id="artist-name" type="text" label="Your Artist Name"/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <input type="email" className="form-control" placeholder="Your Email"/>
+                  <TextField id="email" type="email" label="Your Email"/>
+                </div>
+              </div>
+              <div className="row align-items-center mt-4">
+                <div className="col">
+                  <TextField id="birthday" type="date" label="Your Birthday"/>
                 </div>
               </div>
               <div className="row justify-content-start mt-4">
