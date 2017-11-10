@@ -1,1 +1,37 @@
 .idea
+### Above combination will ignore all files without extension ###
+
+# Ignore files with extension `.class` & `.sm`
+*.class
+*.sm
+
+.gradle
+.metadata/
+.recommenders/
+.DS_Store
+.classpath
+.project
+.settings/**
+.classpath/
+
+# Ignore `bin` dir
+
+bin/
+# or
+**/bin/
+**/bin/*
+
+**/build/
+**/build/*
+
+*.bin
+*.war
+*.ear
+*.jar
+*.prefs
+
+# Ignore all `library.jar` in `bin` dir
+
+**/bin/library.jar
+/target/
+/bin/

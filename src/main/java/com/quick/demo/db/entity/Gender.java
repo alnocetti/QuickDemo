@@ -4,6 +4,7 @@
 package com.quick.demo.db.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author huicha
@@ -35,7 +38,26 @@ public class Gender implements Serializable {
 	private String name;
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "genders")
 	private List<Label> labels;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false, length = 19)
+	private Date creationDate;
 	
+	public Gender() {
+		this.creationDate = new Date();
+	}
+	
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	/**
 	 * @return the genderId
 	 */
