@@ -20,12 +20,12 @@
 }
 
 .textFieldContainer input:focus {
-    border-color: #007bff;
+    border-color: #528bff;
     padding: 4px 6px 20px 6px;
 }
 
 .textFieldContainer input:focus + label {
-    background: #007bff;
+    background: #528bff;
     color: white;
     font-size: 70%;
     padding: 1px 6px;

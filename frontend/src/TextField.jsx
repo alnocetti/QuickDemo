@@ -8,12 +8,15 @@ class TextField extends React.Component {
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   render() {
     return (
       <div className={styles.textFieldContainer}>
-        <input id={this.props.id} type={this.props.type} className="form-control" placeholder={this.props.label}/>
+        <input className="form-control" id={this.props.id} type={this.props.type} placeholder={this.props.label}
+               value={this.props.value} onChange={this.props.onChange}/>
         <label htmlFor={this.props.id}>{this.props.label}</label>
       </div>
     );
