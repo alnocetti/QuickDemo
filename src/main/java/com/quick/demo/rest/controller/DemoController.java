@@ -21,6 +21,7 @@ import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.ArtistEntity;
 import com.quick.demo.db.entity.DemoEntity;
 import com.quick.demo.db.entity.GenreEntity;
+import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.db.entity.dto.Label;
 import com.quick.demo.db.entity.dto.UploadDemo;
@@ -69,14 +70,20 @@ public class DemoController {
 		GenreEntity gender = genderService.findOne(uploadDemo.getDemo().getGenreId()); 
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
 		demoEntity.setGender(gender);
-		//demoService.createDemo(demoEntity);
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
 		artist.getDemos().add(demoEntity);
 		artistService.createArtist(artist);
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);
-			sendEntity.setLabel(labelService.findOne(label.getLabelId()));
+			LabelEntity labelEntity = labelService.findOne(label.getLabelId());
+			if (labelEntity == null){
+				labelEntity = new LabelEntity();
+				labelEntity.setName(label.getName());
+				labelEntity.setMail(label.getMail());
+				labelService.createLabel(labelEntity);
+			}
+			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
 		}
 	}
