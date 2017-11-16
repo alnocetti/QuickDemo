@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quick.demo.back.service.GenderService;
-import com.quick.demo.db.entity.Gender;
-import com.quick.demo.db.repository.GenderRepository;
+import com.quick.demo.db.entity.GenreEntity;
+import com.quick.demo.db.repository.GenreRepository;
 
 @Service
 public class GenderServiceImpl implements GenderService{
 
 	@Autowired
-	private GenderRepository genderRepository;
+	private GenreRepository genderRepository;
 
 	@Override
-	public void createGender(Gender gender) {
+	public void createGender(GenreEntity gender) {
 		genderRepository.saveAndFlush(gender);
 	}
 
@@ -26,12 +26,12 @@ public class GenderServiceImpl implements GenderService{
 	}
 
 	@Override
-	public Gender findOne(Long id) {
+	public GenreEntity findOne(Long id) {
 		return genderRepository.findOne(id);
 	}
 
 	@Override
-	public List<Gender> allGenders() {
+	public List<GenreEntity> allGenders() {
 		return genderRepository.findAll();
 	}
 	

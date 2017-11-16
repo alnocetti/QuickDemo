@@ -21,13 +21,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.quick.demo.db.entity.dto.Demo;
+
 /**
  * @author huicha
  *
  */
 @Entity
 @Table(name = "demo")
-public class Demo implements Serializable {
+public class DemoEntity implements Serializable {
 
 	/**
 	 * 
@@ -40,23 +42,30 @@ public class Demo implements Serializable {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
-	private String description;
+	private String year;
 	@Column(nullable = false)
 	private String filepath;
 	@OneToOne
-	private Gender gender;
+	private GenreEntity gender;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
-	private List<Send> senders;
+	private List<SendEntity> senders;
 	@ManyToOne
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
 	private Cover cover; 
 	
-	public Demo() {
+	public DemoEntity() {
 		this.creationDate = new Date();
+	}
+	
+	public DemoEntity(Demo demo){
+		this();
+		this.setName(demo.getName());
+		this.setYear(demo.getYear());
+		this.setFilepath(demo.getFileId());
 	}
 	
 	/**
@@ -77,6 +86,20 @@ public class Demo implements Serializable {
 	public String getFilepath() {
 		return filepath;
 	}
+	/**
+	 * @return the year
+	 */
+	public String getYear() {
+		return year;
+	}
+
+	/**
+	 * @param year the year to set
+	 */
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	/**
 	 * @param filepath the filepath to set
 	 */
@@ -120,39 +143,27 @@ public class Demo implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	/**
 	 * @return the gender
 	 */
-	public Gender getGender() {
+	public GenreEntity getGender() {
 		return gender;
 	}
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(Gender gender) {
+	public void setGender(GenreEntity gender) {
 		this.gender = gender;
 	}
 	/**
 	 * @return the senders
 	 */
-	public List<Send> getSenders() {
+	public List<SendEntity> getSenders() {
 		return senders;
 	}
 	/**
 	 * @param senders the senders to set
 	 */
-	public void setSenders(List<Send> senders) {
+	public void setSenders(List<SendEntity> senders) {
 		this.senders = senders;
 	}
 	

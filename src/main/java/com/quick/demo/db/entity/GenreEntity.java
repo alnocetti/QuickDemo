@@ -7,15 +7,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,34 +23,26 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
-@Table(name = "label")
-public class Label implements Serializable {
+@Table(name = "genre")
+public class GenreEntity implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5287448052504953400L;
+	private static final long serialVersionUID = -4727148428480359203L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Long labelId;
+	private Long genreId;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "mail", nullable = false)
-	private String mail;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "label_gender", joinColumns = {
-				@JoinColumn(name = "labelId", nullable = false, updatable = false) 
-			},
-			inverseJoinColumns = { 
-				@JoinColumn(name = "genderId", nullable = false, updatable = false) 
-			})
-	private List<Gender> genders;	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "genders")
+	private List<LabelEntity> labels;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	
-	public Label() {
+	public GenreEntity() {
 		this.creationDate = new Date();
 	}
 	
@@ -70,28 +59,16 @@ public class Label implements Serializable {
 		this.creationDate = creationDate;
 	}
 	/**
-	 * @return the labelId
+	 * @return the genderId
 	 */
-	public Long getLabelId() {
-		return labelId;
+	public Long getGenreId() {
+		return genreId;
 	}
 	/**
-	 * @param labelId the labelId to set
+	 * @param genderId the genderId to set
 	 */
-	public void setLabelId(Long labelId) {
-		this.labelId = labelId;
-	}
-	/**
-	 * @return the mail
-	 */
-	public String getMail() {
-		return mail;
-	}
-	/**
-	 * @param mail the mail to set
-	 */
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setGenreId(Long genderId) {
+		this.genreId = genderId;
 	}
 	/**
 	 * @return the name
@@ -106,16 +83,16 @@ public class Label implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the genders
+	 * @return the labels
 	 */
-	public List<Gender> getGenders() {
-		return genders;
+	public List<LabelEntity> getLabels() {
+		return labels;
 	}
 	/**
-	 * @param genders the genders to set
+	 * @param labels the labels to set
 	 */
-	public void setGenders(List<Gender> genders) {
-		this.genders = genders;
+	public void setLabels(List<LabelEntity> labels) {
+		this.labels = labels;
 	}
 	
 }

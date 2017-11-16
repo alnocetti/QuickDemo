@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.LabelService;
-import com.quick.demo.db.entity.Label;
+import com.quick.demo.db.entity.LabelEntity;
 
 @RestController
 @RequestMapping("/api/label")
@@ -27,8 +27,8 @@ public class LabelController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Label> getLabels() {
-		List<Label> labelsDTO = new ArrayList<Label>();
+    public @ResponseBody List<LabelEntity> getLabels() {
+		List<LabelEntity> labelsDTO = new ArrayList<LabelEntity>();
 		return labelsDTO;
 	}
 	
@@ -36,7 +36,7 @@ public class LabelController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Label getLabel(@PathVariable("id") Long id) {
+	public @ResponseBody LabelEntity getLabel(@PathVariable("id") Long id) {
 		System.out.println("Get label with id: " + id);
 		return labelService.findOne(id);
 	}
@@ -46,8 +46,8 @@ public class LabelController {
             consumes = {"application/json"},
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-	public void createLabel(@RequestBody Label labelDTO) {
-		Label label = new Label();
+	public void createLabel(@RequestBody LabelEntity labelDTO) {
+		LabelEntity label = new LabelEntity();
 		label.setName(labelDTO.getName());
 		label.setMail(labelDTO.getMail());
 		labelService.createLabel(label);

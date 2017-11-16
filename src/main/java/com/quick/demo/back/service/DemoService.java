@@ -5,7 +5,7 @@ package com.quick.demo.back.service;
 
 import java.util.List;
 
-import com.quick.demo.db.entity.Demo;
+import com.quick.demo.db.entity.DemoEntity;
 
 /**
  * @author cristianhuichaqueo
@@ -15,10 +15,10 @@ public interface DemoService {
 
 	public void deleteById(Long valueOf);
 	
-	public Demo findOne(Long id);
+	public DemoEntity findOne(Long id);
 
-	public List<Demo> allDemos();
+	public List<DemoEntity> allDemos();
 
-	public void createDemo(Demo demo);
+	public void createDemo(DemoEntity demo);
 	
 }

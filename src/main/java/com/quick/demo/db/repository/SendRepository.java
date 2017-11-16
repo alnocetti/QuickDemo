@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quick.demo.db.entity.LabelEntity;
+import com.quick.demo.db.entity.SendEntity;
 
 /**
  * 
@@ -13,13 +13,13 @@ import com.quick.demo.db.entity.LabelEntity;
  */
 @Repository
 @Transactional
-public interface LabelRepository  extends JpaRepository<LabelEntity, Long>{
+public interface SendRepository  extends JpaRepository<SendEntity, Long>{
 
 	/**
 	 * Gets the availability of an user alias.
 	 * @return Integer 0 is available - 1 is not available.
 	 */
-	@Query("SELECT count(*) FROM LabelEntity l")
-	public Integer countLabel();
+	@Query("SELECT count(*) FROM SendEntity s")
+	public Integer countSenders();
 	
 }

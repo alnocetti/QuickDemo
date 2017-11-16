@@ -3,6 +3,7 @@
  */
 package com.quick.demo.db.entity.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,17 @@ import java.util.List;
  * @author huicha
  *
  */
-public class Demo {
+public class Demo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5531244118694259977L;
 	private Long demoId;
 	private String name;
-	private String description;
-	private String filepath;
-	private Long genderId;
+	private String fileId;
+	private String year;
+	private Long genreId;
 	private Long coverId;
 	private List<Long> senders;
 	
@@ -27,23 +32,23 @@ public class Demo {
 	public Demo(Demo demo) {
 		this.setCoverId(demo.getDemoId());
 		this.setName(demo.getName());
-		this.setDescription(demo.getFilepath());
-		this.setFilepath(demo.getFilepath());
 		List<Long> ids = new ArrayList<Long>();
 		this.setSenders(ids);
 	}
 	/**
-	 * @return the filepath
+	 * @return the fileId
 	 */
-	public String getFilepath() {
-		return filepath;
+	public String getFileId() {
+		return fileId;
 	}
+
 	/**
-	 * @param filepath the filepath to set
+	 * @param fileId the fileId to set
 	 */
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
 	}
+
 	/**
 	 * @return the coverId
 	 */
@@ -93,28 +98,31 @@ public class Demo {
 		this.name = name;
 	}
 	/**
-	 * @return the description
+	 * @return the year
 	 */
-	public String getDescription() {
-		return description;
+	public String getYear() {
+		return year;
 	}
+
 	/**
-	 * @param description the description to set
+	 * @param year the year to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setYear(String year) {
+		this.year = year;
 	}
+
 	/**
-	 * @return the genderId
+	 * @return the genreId
 	 */
-	public Long getGenderId() {
-		return genderId;
+	public Long getGenreId() {
+		return genreId;
 	}
+
 	/**
-	 * @param genderId the genderId to set
+	 * @param genreId the genreId to set
 	 */
-	public void setGenderId(Long genderId) {
-		this.genderId = genderId;
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
 	}
 	
 }

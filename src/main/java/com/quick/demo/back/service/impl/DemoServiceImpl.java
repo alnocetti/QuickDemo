@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quick.demo.back.service.DemoService;
-import com.quick.demo.db.entity.Demo;
+import com.quick.demo.db.entity.DemoEntity;
 import com.quick.demo.db.repository.DemoRepository;
 
 @Service
@@ -21,17 +21,17 @@ public class DemoServiceImpl implements DemoService {
 	}
 
 	@Override
-	public Demo findOne(Long id) {
+	public DemoEntity findOne(Long id) {
 		return demoRepository.findOne(id);
 	}
 
 	@Override
-	public List<Demo> allDemos() {
+	public List<DemoEntity> allDemos() {
 		return demoRepository.findAll();
 	}
 
 	@Override
-	public void createDemo(Demo demo) {
+	public void createDemo(DemoEntity demo) {
 		demoRepository.saveAndFlush(demo);
 	}
 	

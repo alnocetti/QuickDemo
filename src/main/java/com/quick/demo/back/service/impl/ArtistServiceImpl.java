@@ -3,35 +3,33 @@ package com.quick.demo.back.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.quick.demo.back.service.UserService;
-import com.quick.demo.db.entity.User;
-import com.quick.demo.db.repository.UserRepository;
+import com.quick.demo.back.service.ArtistService;
+import com.quick.demo.db.entity.ArtistEntity;
+import com.quick.demo.db.repository.ArtistRepository;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class ArtistServiceImpl implements ArtistService {
 
 	@Autowired
-	private UserRepository accountsRepo;
+	private ArtistRepository accountsRepo;
 
 	@Override
 	public Integer getAccountIdByAliasUserAliasType(String userAlias, String aliasType) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User findOne(Long id) {
+	public ArtistEntity findOne(Long id) {
 		return accountsRepo.findOne(id);
 	}
 
 	@Override
-	public User getAccountByAliasUserAliasType(String userAlias, String aliasType) {
-		// TODO Auto-generated method stub
+	public ArtistEntity getAccountByAliasUserAliasType(String userAlias, String aliasType) {
 		return null;
 	}
 
 	@Override
-	public User getAccountByUserAlias(String userAlias) {
+	public ArtistEntity getAccountByUserAlias(String userAlias) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -51,6 +49,11 @@ public class UserServiceImpl implements UserService {
 	public Integer getUserIdByNickname(String userAlias) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void createArtist(ArtistEntity entity) {
+		accountsRepo.save(entity);
 	}
 	
 }

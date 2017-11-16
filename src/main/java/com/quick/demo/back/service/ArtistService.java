@@ -1,9 +1,11 @@
 package com.quick.demo.back.service;
 
-import com.quick.demo.db.entity.User;
+import com.quick.demo.db.entity.ArtistEntity;
 
-public interface UserService {
+public interface ArtistService {
 
+	public void createArtist(ArtistEntity entity);
+	
 	/**
 	 * Gets an id by the nickname
 	 * @param userAlias
@@ -17,7 +19,7 @@ public interface UserService {
 	 * @param id
 	 * @return User
 	 */
-	public User findOne(Long id);
+	public ArtistEntity findOne(Long id);
 	
 	/**
 	 * Gets an Accounts by its userAlias and aliasType.
@@ -25,7 +27,7 @@ public interface UserService {
 	 * @param aliasType
 	 * @return Integer
 	 */
-	public User getAccountByAliasUserAliasType(String userAlias, String aliasType);
+	public ArtistEntity getAccountByAliasUserAliasType(String userAlias, String aliasType);
 	
 	/**
 	 * Gets an Accounts by its userAlias.
@@ -33,7 +35,7 @@ public interface UserService {
 	 * @param aliasType
 	 * @return Integer
 	 */
-	public User getAccountByUserAlias(String userAlias);
+	public ArtistEntity getAccountByUserAlias(String userAlias);
 	
 	/**
 	 * Gets availability of user name account.

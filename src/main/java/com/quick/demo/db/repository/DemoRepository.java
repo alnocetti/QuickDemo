@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quick.demo.db.entity.Demo;
+import com.quick.demo.db.entity.DemoEntity;
 
 /**
  * 
@@ -13,13 +13,13 @@ import com.quick.demo.db.entity.Demo;
  */
 @Repository
 @Transactional
-public interface DemoRepository  extends JpaRepository<Demo, Long>{
+public interface DemoRepository  extends JpaRepository<DemoEntity, Long>{
 
 	/**
 	 * Gets the availability of an user alias.
 	 * @return Integer 0 is available - 1 is not available.
 	 */
-	@Query("SELECT count(*) FROM Demo d")
+	@Query("SELECT count(*) FROM DemoEntity d")
 	public Integer countDemo();
 	
 }

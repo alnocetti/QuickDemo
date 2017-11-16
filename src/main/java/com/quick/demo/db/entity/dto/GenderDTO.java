@@ -6,8 +6,8 @@ package com.quick.demo.db.entity.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.quick.demo.db.entity.Gender;
-import com.quick.demo.db.entity.Label;
+import com.quick.demo.db.entity.GenreEntity;
+import com.quick.demo.db.entity.LabelEntity;
 
 /**
  * @author huicha
@@ -23,11 +23,11 @@ public class GenderDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GenderDTO(Gender gender) {
-		this.setGenderId(gender.getGenderId());
+	public GenderDTO(GenreEntity gender) {
+		this.setGenderId(gender.getGenreId());
 		this.setName(gender.getName());
 		List<Long> ids = new ArrayList<Long>();
-		for (Label label : gender.getLabels()){
+		for (LabelEntity label : gender.getLabels()){
 			ids.add(label.getLabelId());
 		}
 		this.setLabels(ids);

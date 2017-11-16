@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "send")
-public class Send implements Serializable {
+public class SendEntity implements Serializable {
 
 	/**
 	 * 
@@ -40,40 +40,40 @@ public class Send implements Serializable {
 	private Response response;
 	@ManyToOne
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
-	private Demo demo;
+	private DemoEntity demo;
 	@ManyToOne
 	@JoinColumn(name="labelId", referencedColumnName="labelId")
-	private Label label;
+	private LabelEntity label;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	
-	public Send() {
+	public SendEntity() {
 		this.creationDate = new Date();
 	}
 	
 	/**
 	 * @return the demo
 	 */
-	public Demo getDemo() {
+	public DemoEntity getDemo() {
 		return demo;
 	}
 	/**
 	 * @param demo the demo to set
 	 */
-	public void setDemo(Demo demo) {
+	public void setDemo(DemoEntity demo) {
 		this.demo = demo;
 	}
 	/**
 	 * @return the label
 	 */
-	public Label getLabel() {
+	public LabelEntity getLabel() {
 		return label;
 	}
 	/**
 	 * @param label the label to set
 	 */
-	public void setLabel(Label label) {
+	public void setLabel(LabelEntity label) {
 		this.label = label;
 	}
 	/**

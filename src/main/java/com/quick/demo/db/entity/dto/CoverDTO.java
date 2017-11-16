@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.quick.demo.db.entity.Cover;
-import com.quick.demo.db.entity.Demo;
+import com.quick.demo.db.entity.DemoEntity;
 
 /**
  * @author huicha
@@ -29,7 +29,7 @@ public class CoverDTO {
 		this.setImagePath(cover.getImagePath());
 		this.setName(cover.getName());
 		List<Long> ids = new ArrayList<Long>();
-		for (Demo demo : cover.getDemos()){
+		for (DemoEntity demo : cover.getDemos()){
 			ids.add(demo.getDemoId());
 		}
 		this.setDemos(ids);

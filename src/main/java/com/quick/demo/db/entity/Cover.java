@@ -45,7 +45,7 @@ public class Cover implements Serializable {
 	private Date creationDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="coverId", referencedColumnName="coverId")
-	private List<Demo> demos;
+	private List<DemoEntity> demos;
 	
 	public Cover() {
 		this.creationDate = new Date();
@@ -102,13 +102,13 @@ public class Cover implements Serializable {
 	/**
 	 * @return the demos
 	 */
-	public List<Demo> getDemos() {
+	public List<DemoEntity> getDemos() {
 		return demos;
 	}
 	/**
 	 * @param demos the demos to set
 	 */
-	public void setDemos(List<Demo> demos) {
+	public void setDemos(List<DemoEntity> demos) {
 		this.demos = demos;
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quick.demo.back.service.LabelService;
-import com.quick.demo.db.entity.Label;
+import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.repository.LabelRepository;
 
 @Service
@@ -21,17 +21,17 @@ public class LabelServiceImpl implements LabelService {
 	}
 
 	@Override
-	public Label findOne(Long id) {
+	public LabelEntity findOne(Long id) {
 		return labelRepository.findOne(id);
 	}
 
 	@Override
-	public List<Label> allLabels() {
+	public List<LabelEntity> allLabels() {
 		return labelRepository.findAll();
 	}
 
 	@Override
-	public void createLabel(Label label) {
+	public void createLabel(LabelEntity label) {
 		labelRepository.saveAndFlush(label);
 	}
 	
