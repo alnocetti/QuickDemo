@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quick.demo.back.service.GenderService;
+import com.quick.demo.back.service.GenreService;
 import com.quick.demo.db.entity.GenreEntity;
 import com.quick.demo.db.entity.dto.GenderDTO;
 
@@ -22,14 +22,14 @@ import com.quick.demo.db.entity.dto.GenderDTO;
 public class GenderController {
 
 	@Autowired
-	private GenderService genderService;
+	private GenreService genderService;
 	
 	@RequestMapping(value = "",
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody List<GenderDTO> getGenders() {
-		List<GenreEntity> genders = genderService.allGenders();
+		List<GenreEntity> genders = genderService.allGenres();
 		List<GenderDTO> gendersDTO = new ArrayList<GenderDTO>();
 		for (GenreEntity gender : genders){
 			gendersDTO.add(new GenderDTO(gender));
@@ -55,7 +55,7 @@ public class GenderController {
 	public void createGender(@RequestBody GenderDTO genderDTO) {
 		GenreEntity gender = new GenreEntity();
 		gender.setName(genderDTO.getName());
-		genderService.createGender(gender);
+		genderService.createGenre(gender);
 	}
 
 	@RequestMapping(value = "/{id}",

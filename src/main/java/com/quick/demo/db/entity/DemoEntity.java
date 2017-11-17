@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -53,9 +52,6 @@ public class DemoEntity implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private List<SendEntity> senders;
-	@ManyToOne
-	@JoinColumn(name="coverId", referencedColumnName="coverId")
-	private Cover cover; 
 	
 	public DemoEntity() {
 		this.creationDate = new Date();
@@ -105,18 +101,6 @@ public class DemoEntity implements Serializable {
 	 */
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
-	}
-	/**
-	 * @return the cover
-	 */
-	public Cover getCover() {
-		return cover;
-	}
-	/**
-	 * @param cover the cover to set
-	 */
-	public void setCover(Cover cover) {
-		this.cover = cover;
 	}
 	/**
 	 * @return the demoId

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.ArtistService;
 import com.quick.demo.back.service.DemoService;
-import com.quick.demo.back.service.GenderService;
+import com.quick.demo.back.service.GenreService;
 import com.quick.demo.back.service.LabelService;
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.ArtistEntity;
@@ -23,6 +23,7 @@ import com.quick.demo.db.entity.DemoEntity;
 import com.quick.demo.db.entity.GenreEntity;
 import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.Demo;
 import com.quick.demo.db.entity.dto.Label;
 import com.quick.demo.db.entity.dto.UploadDemo;
 
@@ -33,7 +34,7 @@ public class DemoController {
 	@Autowired
 	private DemoService demoService;
 	@Autowired
-	private GenderService genderService;
+	private GenreService genderService;
 	@Autowired
 	private LabelService labelService;
 	@Autowired
@@ -45,9 +46,11 @@ public class DemoController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<DemoEntity> getDemos() {
-		List<DemoEntity> demos = demoService.allDemos();
-		List<DemoEntity> demosDTO = new ArrayList<DemoEntity>();
+    public @ResponseBody List<Demo> getDemos() {
+		List<Demo> demosDTO = new ArrayList<Demo>();
+		for (DemoEntity demo : demoService.allDemos()){
+			demosDTO.add(new Demo(demo));
+		}
 		return demosDTO;
 	}
 	

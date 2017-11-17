@@ -20,5 +20,7 @@ public interface SendService {
 	public List<SendEntity> allSenders();
 
 	public void createSend(SendEntity send);
+	
+	public void update(SendEntity send);
 
 }

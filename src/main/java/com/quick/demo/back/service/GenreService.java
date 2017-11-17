@@ -11,14 +11,14 @@ import com.quick.demo.db.entity.GenreEntity;
  * @author cristianhuichaqueo
  *
  */
-public interface GenderService {
+public interface GenreService {
 
-	public void createGender(GenreEntity gender);
+	public void createGenre(GenreEntity gender);
 
 	public void deleteById(Long valueOf);
 	
 	public GenreEntity findOne(Long id);
 
-	public List<GenreEntity> allGenders();
+	public List<GenreEntity> allGenres();
 	
 }
