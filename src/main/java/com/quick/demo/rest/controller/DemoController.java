@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,9 @@ import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.db.entity.dto.Demo;
 import com.quick.demo.db.entity.dto.Label;
 import com.quick.demo.db.entity.dto.UploadDemo;
+import com.quick.demo.messages.bean.DemoSendedEmail;
+import com.quick.demo.messages.bean.LabelReviewEmail;
+import com.quick.demo.messages.receive.MessageReceiver;
 
 @RestController
 @RequestMapping("/api/demo")
@@ -41,6 +45,8 @@ public class DemoController {
 	private ArtistService artistService;
 	@Autowired
 	private SendService sendService;
+	@Autowired
+	private JmsMessagingTemplate jmsMessagingTemplate;
 	
 	@RequestMapping(value = "",
             method = RequestMethod.GET,
@@ -86,7 +92,12 @@ public class DemoController {
 			}
 			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
+			LabelReviewEmail labelEmail = new LabelReviewEmail();
+			labelEmail.setTo(label.getMail());
+			this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 		}
+		DemoSendedEmail demoSendedEmail = new DemoSendedEmail(artist.getEmail());
+		this.jmsMessagingTemplate.convertAndSend(MessageReceiver.DEMO_SENDED_QUEUE, demoSendedEmail);
 	}
 
 	@RequestMapping(value = "/{id}",

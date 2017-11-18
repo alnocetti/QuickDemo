@@ -1,12 +1,17 @@
 /**
  * 
  */
-package com.quick.demo.thirdparty.sendgrid;
+package com.quick.demo.messages.receive.processor;
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.quick.demo.messages.bean.EmailTemplate;
+import com.quick.demo.thirdparty.sendgrid.SendEmailSendGridHelper;
+import com.quick.demo.thirdparty.sendgrid.SendGridTemplate;
 import com.sendgrid.Content;
 import com.sendgrid.Email;
 import com.sendgrid.Mail;
@@ -19,31 +24,23 @@ import com.sendgrid.SendGrid;
  * @author huicha
  *
  */
-public class ArtistDemoSendedTemplate extends SendEmailSendGridHelper implements SendGridTemplate {
+@Component
+@Scope("singleton")
+public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate{
 
-	@Value("${sendgrid.template.artistdemosended}")
+	@Value("${sendgrid.template.labelreceivedemo}")
     private String templateId;
-	
-	public ArtistDemoSendedTemplate(String emailTo) {
-		super(emailTo);
-	}
-
-	/**
-	 * @param templateId the templateId to set
-	 */
-	public void setTemplateId(String templateId) {
-		this.templateId = templateId;
-	}
 
 	@Override
 	public String getTemplateId() {
 		return templateId;
 	}
-	
-	public void send() throws IOException {
+
+	@Override
+	public void send(EmailTemplate email) throws IOException {
 		Email from = new Email(this.getEmailFrom());
 		String subject = "I'm replacing the subject tag";
-		Email to = new Email(this.getEmailTo());
+		Email to = new Email(getEmailTo());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, subject, to, content);
 		mail.personalization.get(0).addSubstitution("-name-", "Example User");

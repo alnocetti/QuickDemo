@@ -27,10 +27,6 @@ public class SendEmailSendGridHelper {
     private String emailFrom;
 	private String emailTo;
 
-	public SendEmailSendGridHelper(String emailTo) {
-		this.setEmailTo(emailTo);
-	}
-	
 	public void send(String emailTo, String templateId) throws IOException {
 		Email from = new Email(this.getEmailFrom());
 		String subject = "I'm replacing the subject tag";
@@ -97,4 +93,5 @@ public class SendEmailSendGridHelper {
 	public void setEmailFrom(String emailFrom) {
 		this.emailFrom = emailFrom;
 	}
+	
 }
