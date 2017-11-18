@@ -34,5 +34,10 @@ public class DemoServiceImpl implements DemoService {
 	public void createDemo(DemoEntity demo) {
 		demoRepository.saveAndFlush(demo);
 	}
+
+	@Override
+	public List<DemoEntity> undeliveryDemos() {
+		return demoRepository.undeliveryDemos();
+	}
 	
 }

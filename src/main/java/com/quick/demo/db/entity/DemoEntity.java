@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -45,13 +46,16 @@ public class DemoEntity implements Serializable {
 	@Column(nullable = false)
 	private String filepath;
 	@OneToOne
-	private GenreEntity gender;
+	private GenreEntity genre;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private List<SendEntity> senders;
+	@ManyToOne
+	@JoinColumn(name="artistId", referencedColumnName="artistId")
+	private ArtistEntity artist;
 	
 	public DemoEntity() {
 		this.creationDate = new Date();
@@ -127,18 +131,6 @@ public class DemoEntity implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the gender
-	 */
-	public GenreEntity getGender() {
-		return gender;
-	}
-	/**
-	 * @param gender the gender to set
-	 */
-	public void setGender(GenreEntity gender) {
-		this.gender = gender;
-	}
-	/**
 	 * @return the senders
 	 */
 	public List<SendEntity> getSenders() {
@@ -149,6 +141,34 @@ public class DemoEntity implements Serializable {
 	 */
 	public void setSenders(List<SendEntity> senders) {
 		this.senders = senders;
+	}
+
+	/**
+	 * @return the genre
+	 */
+	public GenreEntity getGenre() {
+		return genre;
+	}
+
+	/**
+	 * @param genre the genre to set
+	 */
+	public void setGenre(GenreEntity genre) {
+		this.genre = genre;
+	}
+
+	/**
+	 * @return the artist
+	 */
+	public ArtistEntity getArtist() {
+		return artist;
+	}
+
+	/**
+	 * @param artist the artist to set
+	 */
+	public void setArtist(ArtistEntity artist) {
+		this.artist = artist;
 	}
 	
 }

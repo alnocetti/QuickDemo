@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.GenreService;
 import com.quick.demo.db.entity.GenreEntity;
-import com.quick.demo.db.entity.dto.GenderDTO;
+import com.quick.demo.db.entity.dto.Genre;
 
 @RestController
-@RequestMapping("/api/genders")
-public class GenderController {
+@RequestMapping("/api/genres")
+public class GenreController {
 
 	@Autowired
 	private GenreService genderService;
@@ -28,11 +28,11 @@ public class GenderController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<GenderDTO> getGenders() {
+    public @ResponseBody List<Genre> getGenders() {
 		List<GenreEntity> genders = genderService.allGenres();
-		List<GenderDTO> gendersDTO = new ArrayList<GenderDTO>();
+		List<Genre> gendersDTO = new ArrayList<Genre>();
 		for (GenreEntity gender : genders){
-			gendersDTO.add(new GenderDTO(gender));
+			gendersDTO.add(new Genre(gender));
 		}
 		return gendersDTO;
 	}
@@ -41,10 +41,10 @@ public class GenderController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody GenderDTO getGender(@PathVariable("id") Long id) {
+	public @ResponseBody Genre getGender(@PathVariable("id") Long id) {
 		System.out.println("Get gender with id: " + id);
 		GenreEntity gender = genderService.findOne(id);
-		return new GenderDTO(gender);
+		return new Genre(gender);
 	}
 	
 	@RequestMapping(value = "",
@@ -52,7 +52,7 @@ public class GenderController {
             consumes = {"application/json"},
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-	public void createGender(@RequestBody GenderDTO genderDTO) {
+	public void createGender(@RequestBody Genre genderDTO) {
 		GenreEntity gender = new GenreEntity();
 		gender.setName(genderDTO.getName());
 		genderService.createGenre(gender);

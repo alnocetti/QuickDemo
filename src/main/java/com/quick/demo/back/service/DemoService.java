@@ -20,5 +20,7 @@ public interface DemoService {
 	public List<DemoEntity> allDemos();
 
 	public void createDemo(DemoEntity demo);
+
+	public List<DemoEntity> undeliveryDemos();
 	
 }

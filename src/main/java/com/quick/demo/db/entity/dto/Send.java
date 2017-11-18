@@ -11,7 +11,7 @@ import com.quick.demo.db.entity.SendEntity;
  * @author huicha
  *
  */
-public class SendDTO implements Serializable {
+public class Send implements Serializable {
 
 	/**
 	 * 
@@ -23,11 +23,11 @@ public class SendDTO implements Serializable {
 	private Long demoId;
 	private Long labelId;
 	
-	public SendDTO() {
+	public Send() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public SendDTO(SendEntity sendEntity) {
+	public Send(SendEntity sendEntity) {
 		this.setDemoId(sendEntity.getDemo().getDemoId());
 		this.setSendId(sendEntity.getSendId());
 		this.setResponse(sendEntity.getResponse().toString());

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.Response;
 import com.quick.demo.db.entity.SendEntity;
-import com.quick.demo.db.entity.dto.SendDTO;
+import com.quick.demo.db.entity.dto.Send;
 
 @RestController
 @RequestMapping("/api/send")
@@ -29,10 +29,10 @@ public class SendController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<SendDTO> getSenders() {
-		List<SendDTO> dtos = new ArrayList<SendDTO>();
+    public @ResponseBody List<Send> getSenders() {
+		List<Send> dtos = new ArrayList<Send>();
 		for (SendEntity send : sendService.allSenders()){
-			dtos.add(new SendDTO(send));
+			dtos.add(new Send(send));
 		}
 		return dtos;
 	}
@@ -41,10 +41,10 @@ public class SendController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody SendDTO getSend(@PathVariable("id") Long id) {
+	public @ResponseBody Send getSend(@PathVariable("id") Long id) {
 		System.out.println("Get label with id: " + id);
 		SendEntity sendEntity = sendService.findOne(id);
-		return new SendDTO(sendEntity);
+		return new Send(sendEntity);
 	}
 	
 	@RequestMapping(value = "/{id}",

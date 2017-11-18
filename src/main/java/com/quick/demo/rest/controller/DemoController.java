@@ -58,10 +58,8 @@ public class DemoController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody DemoEntity getDemo(@PathVariable("id") Long id) {
-		System.out.println("Get demo with id: " + id);
-		DemoEntity demo = demoService.findOne(id);
-		return null;
+	public @ResponseBody Demo getDemo(@PathVariable("id") Long id) {
+		return new Demo(demoService.findOne(id));
 	}
 	
 	@RequestMapping(value = "",
@@ -70,9 +68,9 @@ public class DemoController {
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
 	public void createDemo(@RequestBody UploadDemo uploadDemo) {
-		GenreEntity gender = genderService.findOne(uploadDemo.getDemo().getGenreId()); 
+		GenreEntity genre = genderService.findOne(uploadDemo.getDemo().getGenreId()); 
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
-		demoEntity.setGender(gender);
+		demoEntity.setGenre(genre);
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
 		artist.getDemos().add(demoEntity);
 		artistService.createArtist(artist);

@@ -13,17 +13,17 @@ import com.quick.demo.db.entity.LabelEntity;
  * @author huicha
  *
  */
-public class GenderDTO {
+public class Genre {
 
 	private Long genderId;
 	private String name;
 	private List<Long> labels;
 	
-	public GenderDTO() {
+	public Genre() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GenderDTO(GenreEntity gender) {
+	public Genre(GenreEntity gender) {
 		this.setGenderId(gender.getGenreId());
 		this.setName(gender.getName());
 		List<Long> ids = new ArrayList<Long>();

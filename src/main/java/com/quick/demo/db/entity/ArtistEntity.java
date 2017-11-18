@@ -37,7 +37,7 @@ public class ArtistEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Long userId;
+	private Long artistId;
 	@Column(name = "real_name", nullable = false, length = 200)
 	private String realName;
 	@Column(name = "artist_name", nullable = false, length = 200)
@@ -65,17 +65,17 @@ public class ArtistEntity implements Serializable {
 	}
 
 	/**
-	 * @return the userId
+	 * @return the artistId
 	 */
-	public Long getUserId() {
-		return userId;
+	public Long getArtistId() {
+		return artistId;
 	}
 
 	/**
-	 * @param userId the userId to set
+	 * @param artistId the artistId to set
 	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setArtistId(Long artistId) {
+		this.artistId = artistId;
 	}
 
 	/**
