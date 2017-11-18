@@ -92,8 +92,7 @@ public class DemoController {
 			}
 			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
-			LabelReviewEmail labelEmail = new LabelReviewEmail();
-			labelEmail.setTo(label.getMail());
+			LabelReviewEmail labelEmail = new LabelReviewEmail(label.getMail());
 			this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 		}
 		DemoSendedEmail demoSendedEmail = new DemoSendedEmail(artist.getEmail());

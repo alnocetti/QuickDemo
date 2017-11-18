@@ -47,7 +47,7 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 	public void send(EmailTemplate email) throws IOException {
 		Email from = new Email(this.getEmailFrom());
 		String subject = "I'm replacing the subject tag";
-		Email to = new Email(this.getEmailTo());
+		Email to = new Email(email.getTo());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, subject, to, content);
 		mail.personalization.get(0).addSubstitution("-name-", "Example User");

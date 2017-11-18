@@ -7,11 +7,19 @@ package com.quick.demo.messages.bean;
  */
 public class LabelReviewEmail implements EmailTemplate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3931465571801109259L;
 	private String to;
 	private String subjet;
 	private String body;
 
 	public LabelReviewEmail() {
+	}
+	
+	public LabelReviewEmail(String to) {
+		this.to= to;
 	}
 
 	public LabelReviewEmail(String to, String body) {

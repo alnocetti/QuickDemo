@@ -9,10 +9,18 @@ package com.quick.demo.messages.bean;
  */
 public class DemoSendedEmail implements EmailTemplate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5720873164542288086L;
 	private String to;
 	private String subjet;
 	private String body;
 
+	public DemoSendedEmail() {
+	
+	}
+	
 	public DemoSendedEmail(String to) {
 		this.to = to;
 	}

@@ -30,7 +30,7 @@ public class MessageReceiver {
 	    try {
 	    	demoSendedTemplateProcessor.send(labelEmail);
 	    } catch (Exception e) {
-	    	logger.error("ERROR AL INTENTAR ENVIAR TEMPLATE DE LABELPROCESSOR: ", e);
+	    	logger.error("ERROR AL INTENTAR PROCESAR DEMO_SENDED_QUEUE: ", e);
 	    }
     }
     
@@ -39,7 +39,7 @@ public class MessageReceiver {
 	    try {
 	    	labelReviewTemplateProcessor.send(labelEmail);
 	    } catch (Exception e) {
-	    	logger.error("ERROR AL INTENTAR PROCESAR LA TRANSACCION: ", e);
+	    	logger.error("ERROR AL INTENTAR PROCESAR LABEL_REVIEW_QUEUE: ", e);
 	    }
     }
     

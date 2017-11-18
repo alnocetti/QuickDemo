@@ -15,7 +15,7 @@ import org.springframework.jms.support.converter.MessageType;
 public class ActiveMQConfig {
 
 	@Bean
-	public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory,
+	public JmsListenerContainerFactory<?> quickDemoFactory(ConnectionFactory connectionFactory,
 			DefaultJmsListenerContainerFactoryConfigurer configurer) {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 		// This provides all boot's default to this factory, including the
