@@ -14,6 +14,7 @@ public class LabelReviewEmail implements EmailTemplate {
 	private String to;
 	private String subjet;
 	private String body;
+	private Long transaction;
 
 	public LabelReviewEmail() {
 	}
@@ -54,6 +55,20 @@ public class LabelReviewEmail implements EmailTemplate {
 	@Override
 	public String toString() {
 		return String.format("Email{to=%s, body=%s}", getTo(), getBody());
+	}
+
+	/**
+	 * @return the transaction
+	 */
+	public Long getTransaction() {
+		return transaction;
+	}
+
+	/**
+	 * @param transaction the transaction to set
+	 */
+	public void setTransaction(Long transaction) {
+		this.transaction = transaction;
 	}
 
 }

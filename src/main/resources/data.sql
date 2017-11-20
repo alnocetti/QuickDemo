@@ -1,7 +1,10 @@
-INSERT INTO label (name, mail, creation_date) VALUES ("Tronic", "demos@tronic.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Latoli", "demos@latoli.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Picho", "demos@picho.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Garlopa", "demos@garlopa.com", NOW());
+INSERT INTO label (name, mail, creation_date) VALUES ("Tronic", "cristianhuichaqueo@gmail.com", NOW());
+--INSERT INTO label (name, mail, creation_date) VALUES ("Latoli", "alnocetti@gmail.com", NOW());
+INSERT INTO label (name, mail, creation_date) VALUES ("Latoli", "cristianhuichaqueo@gmail.com", NOW());
+--INSERT INTO label (name, mail, creation_date) VALUES ("Picho", "eaiannicelli@gmail.com", NOW());
+INSERT INTO label (name, mail, creation_date) VALUES ("Picho", "cristianhuichaqueo@gmail.com", NOW());
+--INSERT INTO label (name, mail, creation_date) VALUES ("Garlopa", "nkuglien@gmail.com", NOW());
+INSERT INTO label (name, mail, creation_date) VALUES ("Garlopa", "cristianhuichaqueo@gmail.com", NOW());
 
 INSERT INTO genre (name, creation_date) VALUES ("Tech house", NOW());
 INSERT INTO genre (name, creation_date) VALUES ("Bass house", NOW());

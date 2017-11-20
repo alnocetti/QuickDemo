@@ -15,21 +15,6 @@ public class SendEmailSendGridHelper {
     private String sendGridKey;
 	@Value("${sendgrid.emailfrom}")
     private String emailFrom;
-	private String emailTo;
-
-	/**
-	 * @return the emailTo
-	 */
-	public String getEmailTo() {
-		return emailTo;
-	}
-
-	/**
-	 * @param emailTo the emailTo to set
-	 */
-	public void setEmailTo(String emailTo) {
-		this.emailTo = emailTo;
-	}
 
 	/**
 	 * @return the sendGridKey
