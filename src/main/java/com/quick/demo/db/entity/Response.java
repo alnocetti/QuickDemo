@@ -9,4 +9,6 @@ package com.quick.demo.db.entity;
  */
 public enum Response {
 
+	PENDING, DELIVERED, ACCEPTED, REFUSED;
+	
 }
