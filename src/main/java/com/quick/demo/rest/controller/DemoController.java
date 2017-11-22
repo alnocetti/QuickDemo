@@ -80,6 +80,7 @@ public class DemoController {
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
 		artist.getDemos().add(demoEntity);
 		artistService.createArtist(artist);
+		demoEntity.setArtist(artist);
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);
