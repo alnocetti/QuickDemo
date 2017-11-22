@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import ReactFilestack from 'filestack-react';
 import TextField from './TextField';
+import dataStore from './dataStore';
 import store from './store';
 
 export default class FormStep2 extends React.Component {
@@ -82,8 +83,9 @@ export default class FormStep2 extends React.Component {
                   <select className="form-control" name="track-genre" id="track-genre" value={demo.genreId}
                           onChange={this.onFieldChange.bind(this, 'genreId')}>
                     <option value="0">- Genre -</option>
-                    <option value="1">Tech House</option>
-                    <option value="2">Techno</option>
+                    {
+                      dataStore.genres.map(g => <option key={g.genreId} value={g.genreId}>{g.name}</option>)
+                    }
                   </select>
                 </div>
                 <div className="col">
