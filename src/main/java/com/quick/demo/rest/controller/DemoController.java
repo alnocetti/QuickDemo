@@ -32,7 +32,7 @@ import com.quick.demo.messages.bean.LabelReviewEmail;
 import com.quick.demo.messages.receive.MessageReceiver;
 
 @RestController
-@RequestMapping("/api/demo")
+@RequestMapping("/api/demos")
 public class DemoController {
 
 	@Autowired

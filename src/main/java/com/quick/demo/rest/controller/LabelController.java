@@ -18,7 +18,7 @@ import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.entity.dto.Label;
 
 @RestController
-@RequestMapping("/api/label")
+@RequestMapping("/api/labels")
 public class LabelController {
 
 	@Autowired
