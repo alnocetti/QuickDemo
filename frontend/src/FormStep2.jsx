@@ -37,7 +37,9 @@ export default class FormStep2 extends React.Component {
     }
 
     const fileId = result.filesUploaded[0].handle;
-    this.setState({fileId});
+    const {demo} = this.state;
+    demo.fileId = fileId;
+    this.setState({demo});
   }
 
   onUploadError() {
@@ -80,7 +82,7 @@ export default class FormStep2 extends React.Component {
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <select className="form-control" name="track-genre" id="track-genre" value={demo.genreId}
+                  <select className="form-control" name="track-genre" style={{height: 48}} value={demo.genreId}
                           onChange={this.onFieldChange.bind(this, 'genreId')}>
                     <option value="0">- Genre -</option>
                     {

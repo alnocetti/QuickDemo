@@ -1,29 +1,67 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Select from 'react-select';
+import _ from 'underscore';
 import TextField from './TextField';
+import dataStore from './dataStore';
 import store from './store';
 
 export default class FormStep3 extends React.Component {
   state = {
-    labels: store.getLabels()
+    labels: store.getLabels(),
+    newLabel: {
+      name: '',
+      email: '',
+    }
   };
 
-  onFieldChange(field, event) {
+  onNewLabelFieldChange(field, event) {
     event.preventDefault();
+    const {newLabel} = this.state;
+    newLabel[field] = event.target.value;
+    this.setState({newLabel});
+  }
+
+  onLabelsChange(value) {
+    this.setState({
+      labels: value.map(v => _.findWhere(dataStore.labels, {labelId: v.value}))
+    });
+  }
+
+  onAddLabelClick(event) {
+    event.preventDefault();
+
+    const {newLabel} = this.state;
+    if (!newLabel.name || !newLabel.email) return;
+    // TODO: validate new label fields
+    newLabel.labelId = new Date().getTime() * -1;
+    dataStore.labels.push(newLabel);
+
     const {labels} = this.state;
-    labels[field] = event.target.value;
-    this.setState({labels});
+    labels.push(newLabel);
+
+    this.setState({
+      labels,
+      newLabel: {name: '', email: ''},
+    });
   }
 
   onSendClick(event) {
     event.preventDefault();
     // TODO: validate
     store.setLabels(this.state.labels);
-    // TODO: call API
+    dataStore.submit(store.getState())
+      .then(() => {
+        // TODO: navigate to a "Success" screen
+      })
+      .catch((err) => console.error(err));
   }
 
   render() {
-    const {labels} = this.state;
+    const selected = this.state.labels.map(l => ({value: l.labelId, label: l.name}));
+    const options = dataStore.labels.map(l => ({value: l.labelId, label: l.name}));
+    const {newLabel} = this.state;
+
     return (
       <section className="fdb-block">
         <div className="container">
@@ -32,15 +70,28 @@ export default class FormStep3 extends React.Component {
               <div className="row">
                 <div className="col text-center">
                   <h1>Label</h1>
-                  <p className="text-h3">Last step! Please, complete the label information below.</p>
+                  <p className="text-h3">Last step! Please, select one or more labels.</p>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <TextField id="label-name" type="text" label="Label Name"/>
+                  <Select value={selected} options={options}
+                          onChange={this.onLabelsChange.bind(this)} multi/>
                 </div>
-                <div className="col">
-                  <TextField id="label-email" type="email" label="Label Email"/>
+              </div>
+              <div className="row align-items-center">
+                <div className="col mt-4">
+                  <TextField id="new-label-name" type="text" label="Label Name"
+                             value={newLabel.name} onChange={this.onNewLabelFieldChange.bind(this, 'name')}/>
+                </div>
+                <div className="col mt-4">
+                  <TextField id="new-label-email" type="text" label="Label Email"
+                             value={newLabel.email} onChange={this.onNewLabelFieldChange.bind(this, 'email')}/>
+                </div>
+                <div className="col mt-4">
+                  <button className="btn" style={{width: '100%'}} type="button"
+                          onClick={this.onAddLabelClick.bind(this)}>Add Label
+                  </button>
                 </div>
               </div>
               <div className="row text-center justify-content-center mt-4">

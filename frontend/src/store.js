@@ -11,13 +11,13 @@ const store = {
     genreId: 0,
     year: 2017
   },
-  label: [{
-    name: '',
-    email: ''
-  }]
+  labels: []
 };
 
 export default {
+  getState() {
+    return store;
+  },
   getArtist() {
     return store.artist;
   },
@@ -31,9 +31,9 @@ export default {
     store.demo = demo;
   },
   getLabels() {
-    return store.label;
+    return store.labels;
   },
-  setLabels(label) {
-    store.label = label;
+  setLabels(labels) {
+    store.labels = labels;
   },
 };

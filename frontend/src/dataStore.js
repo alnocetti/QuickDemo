@@ -5,11 +5,22 @@ export default {
   labels: [],
   load() {
     return Promise.all([
-      this.getAsPromise('/genres', 'genres'),
-      this.getAsPromise('/labels', 'labels'),
+      this._getAsPromise('/genres', 'genres'),
+      this._getAsPromise('/labels', 'labels'),
     ]);
   },
-  getAsPromise(path, key) {
+  submit(body) {
+    return new Promise((resolve, reject) => {
+      api.post('/demos', body, (err) => {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve();
+      });
+    });
+  },
+  _getAsPromise(path, key) {
     return new Promise((resolve, reject) => {
       api.get(path, (err, result) => {
         if (err) {
