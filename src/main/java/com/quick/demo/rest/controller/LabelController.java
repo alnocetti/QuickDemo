@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.LabelService;
 import com.quick.demo.db.entity.LabelEntity;
+import com.quick.demo.db.entity.dto.Label;
 
 @RestController
 @RequestMapping("/api/label")
@@ -27,11 +28,15 @@ public class LabelController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<LabelEntity> getLabels() {
-		List<LabelEntity> labelsDTO = new ArrayList<LabelEntity>();
+    public @ResponseBody List<Label> getLabels() {
+		List<LabelEntity> labels = labelService.allLabels();
+		List<Label> labelsDTO = new ArrayList<Label>();
+		for (LabelEntity label : labels) {
+			labelsDTO.add(new Label(label));
+		}
 		return labelsDTO;
 	}
-	
+
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})

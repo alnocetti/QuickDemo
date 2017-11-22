@@ -6,6 +6,8 @@ package com.quick.demo.db.entity.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.quick.demo.db.entity.LabelEntity;
+
 /**
  * @author huicha
  *
@@ -20,8 +22,8 @@ public class Label {
 	public Label() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Label(Label label) {
+
+	public Label(LabelEntity label) {
 		this.setLabelId(label.getLabelId());
 		this.setName(label.getName());
 		this.setMail(label.getMail());
