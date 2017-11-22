@@ -16,7 +16,7 @@ public class Label {
 
 	private Long labelId;
 	private String name;
-	private String mail;
+	private String email;
 	private List<Long> genres;
 	
 	public Label() {
@@ -26,7 +26,7 @@ public class Label {
 	public Label(LabelEntity label) {
 		this.setLabelId(label.getLabelId());
 		this.setName(label.getName());
-		this.setMail(label.getMail());
+		this.setEmail(label.getEmail());
 		List<Long> ids = new ArrayList<Long>();
 		this.setGenres(ids);
 	}
@@ -45,14 +45,14 @@ public class Label {
 	/**
 	 * @return the mail
 	 */
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param mail the mail to set
 	 */
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String mail) {
+		this.email = mail;
 	}
 	/**
 	 * @return the name

@@ -39,8 +39,8 @@ public class LabelEntity implements Serializable {
 	private Long labelId;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "mail", nullable = false)
-	private String mail;
+	@Column(name = "email", nullable = false)
+	private String email;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "label_genre", joinColumns = {
 				@JoinColumn(name = "labelId", nullable = false, updatable = false) 
@@ -84,14 +84,14 @@ public class LabelEntity implements Serializable {
 	/**
 	 * @return the mail
 	 */
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param mail the mail to set
 	 */
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String mail) {
+		this.email = mail;
 	}
 	/**
 	 * @return the name

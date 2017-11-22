@@ -40,7 +40,7 @@ public class SendDemoTask {
 		log.info("Looking for some demo to send {}", dateFormat.format(new Date()));
 		for (DemoEntity demo : demoService.undeliveryDemos()) {
 			for (SendEntity sendEntity : demo.getSenders()){
-				LabelReviewEmail labelEmail = new LabelReviewEmail(sendEntity.getLabel().getMail());
+				LabelReviewEmail labelEmail = new LabelReviewEmail(sendEntity.getLabel().getEmail());
 				labelEmail.setTransaction(sendEntity.getSendId());
 				this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 			}

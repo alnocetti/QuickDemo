@@ -1,13 +1,13 @@
-INSERT INTO label (name, mail, creation_date) VALUES ("Hot Creations", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Mother Recordings", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("DIRTYBIRD", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Sola", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Solid Grooves Records", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Pryda Recordings", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("ELEVATE", "cristianhuichaqueo@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Relief", "alnocetti@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Defected", "eaiannicelli@gmail.com", NOW());
-INSERT INTO label (name, mail, creation_date) VALUES ("Watergate Records", "nkuglien@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Hot Creations", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Mother Recordings", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("DIRTYBIRD", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Sola", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Solid Grooves Records", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Pryda Recordings", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("ELEVATE", "cristianhuichaqueo@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Relief", "alnocetti@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Defected", "eaiannicelli@gmail.com", NOW());
+INSERT INTO label (name, email, creation_date) VALUES ("Watergate Records", "nkuglien@gmail.com", NOW());
 
 INSERT INTO genre (name, creation_date) VALUES ("Big Room", NOW());
 INSERT INTO genre (name, creation_date) VALUES ("Breaks", NOW());
@@ -72,11 +72,8 @@ INSERT INTO label_genre (label_id, genre_id) VALUES (1, 1);
 INSERT INTO label_genre (label_id, genre_id) VALUES (1, 2);
 INSERT INTO label_genre (label_id, genre_id) VALUES (1, 3);
 INSERT INTO label_genre (label_id, genre_id) VALUES (1, 4);
-
 INSERT INTO label_genre (label_id, genre_id) VALUES (2, 1);
 INSERT INTO label_genre (label_id, genre_id) VALUES (2, 2);
 INSERT INTO label_genre (label_id, genre_id) VALUES (2, 3);
-
 INSERT INTO label_genre (label_id, genre_id) VALUES (3, 1);
-
 INSERT INTO label_genre (label_id, genre_id) VALUES (4, 1);

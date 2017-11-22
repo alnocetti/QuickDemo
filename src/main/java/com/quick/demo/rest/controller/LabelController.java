@@ -56,7 +56,7 @@ public class LabelController {
 	public void createLabel(@RequestBody LabelEntity labelDTO) {
 		LabelEntity label = new LabelEntity();
 		label.setName(labelDTO.getName());
-		label.setMail(labelDTO.getMail());
+		label.setEmail(labelDTO.getEmail());
 		labelService.createLabel(label);
 	}
 

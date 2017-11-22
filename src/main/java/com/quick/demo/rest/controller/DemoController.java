@@ -84,16 +84,16 @@ public class DemoController {
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);
-			LabelEntity labelEntity = labelService.findOne(label.getLabelId());
+			LabelEntity labelEntity = label.getLabelId() != null ? labelService.findOne(label.getLabelId()) : null;
 			if (labelEntity == null){
 				labelEntity = new LabelEntity();
 				labelEntity.setName(label.getName());
-				labelEntity.setMail(label.getMail());
+				labelEntity.setEmail(label.getEmail());
 				labelService.createLabel(labelEntity);
 			}
 			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
-			LabelReviewEmail labelEmail = new LabelReviewEmail(labelEntity.getMail());
+			LabelReviewEmail labelEmail = new LabelReviewEmail(labelEntity.getEmail());
 			labelEmail.setTransaction(sendEntity.getSendId());
 			this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 		}

@@ -53,7 +53,7 @@ public class DemoEntity implements Serializable {
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private List<SendEntity> senders;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="artistId", referencedColumnName="artistId")
 	private ArtistEntity artist;
 	
