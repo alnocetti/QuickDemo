@@ -13,7 +13,7 @@ import com.quick.demo.db.entity.GenreEntity;
  */
 public interface GenreService {
 
-	public void createGenre(GenreEntity gender);
+	public void createGenre(GenreEntity genre);
 
 	public void deleteById(Long valueOf);
 	

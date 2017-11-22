@@ -16,8 +16,8 @@ public class GenreServiceImpl implements GenreService{
 	private GenreRepository genreRepository;
 
 	@Override
-	public void createGenre(GenreEntity gender) {
-		genreRepository.saveAndFlush(gender);
+	public void createGenre(GenreEntity genre) {
+		genreRepository.saveAndFlush(genre);
 	}
 
 	@Override

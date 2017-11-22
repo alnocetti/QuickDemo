@@ -48,7 +48,7 @@ public class LabelEntity implements Serializable {
 			inverseJoinColumns = { 
 				@JoinColumn(name = "genreId", nullable = false, updatable = false) 
 			})
-	private List<GenreEntity> genders;	
+	private List<GenreEntity> genres;	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
@@ -106,16 +106,16 @@ public class LabelEntity implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the genders
+	 * @return the genres
 	 */
-	public List<GenreEntity> getGenders() {
-		return genders;
+	public List<GenreEntity> getGenres() {
+		return genres;
 	}
 	/**
-	 * @param genders the genders to set
+	 * @param genres the genres to set
 	 */
-	public void setGenders(List<GenreEntity> genders) {
-		this.genders = genders;
+	public void setGenres(List<GenreEntity> genres) {
+		this.genres = genres;
 	}
 	
 }

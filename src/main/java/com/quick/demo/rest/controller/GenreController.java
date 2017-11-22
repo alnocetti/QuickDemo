@@ -22,29 +22,29 @@ import com.quick.demo.db.entity.dto.Genre;
 public class GenreController {
 
 	@Autowired
-	private GenreService genderService;
+	private GenreService genreService;
 	
 	@RequestMapping(value = "",
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<Genre> getGenders() {
-		List<GenreEntity> genders = genderService.allGenres();
-		List<Genre> gendersDTO = new ArrayList<Genre>();
-		for (GenreEntity gender : genders){
-			gendersDTO.add(new Genre(gender));
+    public @ResponseBody List<Genre> getGenres() {
+		List<GenreEntity> genres = genreService.allGenres();
+		List<Genre> genresDTO = new ArrayList<Genre>();
+		for (GenreEntity genre : genres){
+			genresDTO.add(new Genre(genre));
 		}
-		return gendersDTO;
+		return genresDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Genre getGender(@PathVariable("id") Long id) {
-		System.out.println("Get gender with id: " + id);
-		GenreEntity gender = genderService.findOne(id);
-		return new Genre(gender);
+	public @ResponseBody Genre getGenre(@PathVariable("id") Long id) {
+		System.out.println("Get genre with id: " + id);
+		GenreEntity genre = genreService.findOne(id);
+		return new Genre(genre);
 	}
 	
 	@RequestMapping(value = "",
@@ -52,10 +52,10 @@ public class GenreController {
             consumes = {"application/json"},
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-	public void createGender(@RequestBody Genre genderDTO) {
-		GenreEntity gender = new GenreEntity();
-		gender.setName(genderDTO.getName());
-		genderService.createGenre(gender);
+	public void createGenre(@RequestBody Genre genreDTO) {
+		GenreEntity genre = new GenreEntity();
+		genre.setName(genreDTO.getName());
+		genreService.createGenre(genre);
 	}
 
 	@RequestMapping(value = "/{id}",
@@ -63,8 +63,8 @@ public class GenreController {
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		System.out.println("Delete gender with id: " + id);
-		genderService.deleteById(id);
+		System.out.println("Delete genre with id: " + id);
+		genreService.deleteById(id);
 	}
 	
 }

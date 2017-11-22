@@ -17,7 +17,7 @@ public class Label {
 	private Long labelId;
 	private String name;
 	private String mail;
-	private List<Long> genders;
+	private List<Long> genres;
 	
 	public Label() {
 		// TODO Auto-generated constructor stub
@@ -28,7 +28,7 @@ public class Label {
 		this.setName(label.getName());
 		this.setMail(label.getMail());
 		List<Long> ids = new ArrayList<Long>();
-		this.setGenders(ids);
+		this.setGenres(ids);
 	}
 	/**
 	 * @return the labelId
@@ -67,16 +67,16 @@ public class Label {
 		this.name = name;
 	}
 	/**
-	 * @return the genders
+	 * @return the genres
 	 */
-	public List<Long> getGenders() {
-		return genders;
+	public List<Long> getGenres() {
+		return genres;
 	}
 	/**
-	 * @param genders the genders to set
+	 * @param genres the genres to set
 	 */
-	public void setGenders(List<Long> genders) {
-		this.genders = genders;
+	public void setGenres(List<Long> genres) {
+		this.genres = genres;
 	}
 	
 }

@@ -36,7 +36,7 @@ public class GenreEntity implements Serializable {
 	private Long genreId;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "genders")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "genres")
 	private List<LabelEntity> labels;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
@@ -59,16 +59,16 @@ public class GenreEntity implements Serializable {
 		this.creationDate = creationDate;
 	}
 	/**
-	 * @return the genderId
+	 * @return the genreId
 	 */
 	public Long getGenreId() {
 		return genreId;
 	}
 	/**
-	 * @param genderId the genderId to set
+	 * @param genreId the genreId to set
 	 */
-	public void setGenreId(Long genderId) {
-		this.genreId = genderId;
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
 	}
 	/**
 	 * @return the name

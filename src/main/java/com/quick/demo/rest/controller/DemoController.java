@@ -38,7 +38,7 @@ public class DemoController {
 	@Autowired
 	private DemoService demoService;
 	@Autowired
-	private GenreService genderService;
+	private GenreService genreService;
 	@Autowired
 	private LabelService labelService;
 	@Autowired
@@ -74,7 +74,7 @@ public class DemoController {
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
 	public void createDemo(@RequestBody UploadDemo uploadDemo) {
-		GenreEntity genre = genderService.findOne(uploadDemo.getDemo().getGenreId()); 
+		GenreEntity genre = genreService.findOne(uploadDemo.getDemo().getGenreId()); 
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
 		demoEntity.setGenre(genre);
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
