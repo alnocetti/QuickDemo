@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, createMemoryHistory} from 'react-router';
 import App from './App';
 import Login from './Login';
 import Home from './Home';
@@ -25,7 +25,7 @@ class AppWrapper extends React.Component {
 
   render() {
     return (
-      <Router history={browserHistory}>
+      <Router history={createMemoryHistory()}>
         <Route path="/login" onEnter={this.onLoginEnter.bind(this)} component={Login}/>
         <Route path="/" onEnter={this.onAppEnter.bind(this)} component={App}>
           <IndexRoute component={Home}/>

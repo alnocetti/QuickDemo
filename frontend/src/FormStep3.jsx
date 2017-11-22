@@ -1,9 +1,29 @@
 import React from 'react';
 import {Link} from 'react-router';
 import TextField from './TextField';
+import store from './store';
 
 export default class FormStep3 extends React.Component {
+  state = {
+    labels: store.getLabels()
+  };
+
+  onFieldChange(field, event) {
+    event.preventDefault();
+    const {labels} = this.state;
+    labels[field] = event.target.value;
+    this.setState({labels});
+  }
+
+  onSendClick(event) {
+    event.preventDefault();
+    // TODO: validate
+    store.setLabels(this.state.labels);
+    // TODO: call API
+  }
+
   render() {
+    const {labels} = this.state;
     return (
       <section className="fdb-block">
         <div className="container">
@@ -37,7 +57,7 @@ export default class FormStep3 extends React.Component {
                 </div>
                 <div className="col">
                   <div className="d-flex justify-content-end">
-                    <button className="btn mt-4">Send</button>
+                    <button className="btn mt-4" onClick={this.onSendClick.bind(this)}>Send</button>
                   </div>
                 </div>
               </div>

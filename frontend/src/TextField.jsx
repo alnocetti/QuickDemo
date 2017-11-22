@@ -8,7 +8,10 @@ class TextField extends React.Component {
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     onChange: PropTypes.func,
   };
 
