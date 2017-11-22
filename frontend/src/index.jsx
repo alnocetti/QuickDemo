@@ -7,8 +7,20 @@ import Home from './Home';
 import FormStep1 from './FormStep1';
 import FormStep2 from './FormStep2';
 import FormStep3 from './FormStep3';
+import Loading from './Loading';
+import dataStore from './dataStore';
 
 class AppWrapper extends React.Component {
+  state = {
+    loading: true
+  };
+
+  componentDidMount() {
+    dataStore.load()
+      .then(() => this.setState({loading: false}))
+      .catch((err) => console.error(err));
+  }
+
   onAppEnter(nextState, replace) {
     // const token = auth.getToken();
     // if (!token) {
@@ -24,6 +36,10 @@ class AppWrapper extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loading/>;
+    }
+
     return (
       <Router history={createMemoryHistory()}>
         <Route path="/login" onEnter={this.onLoginEnter.bind(this)} component={Login}/>
