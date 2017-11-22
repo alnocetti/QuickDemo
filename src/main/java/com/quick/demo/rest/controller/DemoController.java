@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,12 +68,13 @@ public class DemoController {
 	public @ResponseBody Demo getDemo(@PathVariable("id") Long id) {
 		return new Demo(demoService.findOne(id));
 	}
-	
+
 	@RequestMapping(value = "",
             method = RequestMethod.POST,
             consumes = {"application/json"},
             produces = {"application/json"})
-    @ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
+	@CrossOrigin(origins = "http://localhost:3000")
 	public void createDemo(@RequestBody UploadDemo uploadDemo) {
 		GenreEntity genre = genreService.findOne(uploadDemo.getDemo().getGenreId()); 
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
