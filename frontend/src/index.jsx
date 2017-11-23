@@ -7,6 +7,7 @@ import Home from './Home';
 import FormStep1 from './FormStep1';
 import FormStep2 from './FormStep2';
 import FormStep3 from './FormStep3';
+import FormSuccess from './FormSuccess';
 import Loading from './Loading';
 import dataStore from './dataStore';
 
@@ -48,6 +49,7 @@ class AppWrapper extends React.Component {
           <Route path="/step-one" component={FormStep1}/>
           <Route path="/step-two" component={FormStep2}/>
           <Route path="/step-three" component={FormStep3}/>
+          <Route path="/success" component={FormSuccess}/>
         </Route>
       </Router>
     );

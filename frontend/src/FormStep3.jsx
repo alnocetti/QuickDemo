@@ -52,7 +52,8 @@ export default class FormStep3 extends React.Component {
     store.setLabels(this.state.labels);
     dataStore.submit(store.getState())
       .then(() => {
-        // TODO: navigate to a "Success" screen
+        // TODO: clean application state
+        this.props.router.push('/success');
       })
       .catch((err) => console.error(err));
   }
