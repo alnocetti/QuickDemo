@@ -20,6 +20,6 @@ public interface GenreRepository  extends JpaRepository<GenreEntity, Long>{
 	 * @return Integer 0 is available - 1 is not available.
 	 */
 	@Query("SELECT count(*) FROM GenreEntity g")
-	public Integer countGender();
+	public Integer countGenre();
 	
 }

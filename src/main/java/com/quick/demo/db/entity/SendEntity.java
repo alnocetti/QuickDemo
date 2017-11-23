@@ -50,6 +50,7 @@ public class SendEntity implements Serializable {
 	
 	public SendEntity() {
 		this.creationDate = new Date();
+		this.setResponse(Response.PENDING);
 	}
 	
 	/**

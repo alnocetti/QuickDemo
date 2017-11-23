@@ -1,5 +1,7 @@
 package com.quick.demo.db.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,12 @@ public interface SendRepository  extends JpaRepository<SendEntity, Long>{
 	 */
 	@Query("SELECT count(*) FROM SendEntity s")
 	public Integer countSenders();
+	
+	/**
+	 * Gets the availability of an user alias.
+	 * @return Integer 0 is available - 1 is not available.
+	 */
+	@Query("FROM SendEntity s WHERE s.response = 'PENDING'")
+	public List<SendEntity> pendings();
 	
 }

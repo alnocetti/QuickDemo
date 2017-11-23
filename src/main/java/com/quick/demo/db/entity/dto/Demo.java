@@ -4,8 +4,9 @@
 package com.quick.demo.db.entity.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
+import com.quick.demo.db.entity.DemoEntity;
 
 /**
  * @author huicha
@@ -17,49 +18,35 @@ public class Demo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5531244118694259977L;
+	
 	private Long demoId;
 	private String name;
 	private String fileId;
 	private String year;
 	private Long genreId;
-	private Long coverId;
 	private List<Long> senders;
 	
 	public Demo() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Demo(Demo demo) {
-		this.setCoverId(demo.getDemoId());
+
+	public Demo(DemoEntity demo) {
 		this.setName(demo.getName());
-		List<Long> ids = new ArrayList<Long>();
-		this.setSenders(ids);
+		this.setYear(demo.getYear());
+		this.setGenreId(demo.getDemoId());
 	}
+
 	/**
 	 * @return the fileId
 	 */
 	public String getFileId() {
 		return fileId;
 	}
-
 	/**
 	 * @param fileId the fileId to set
 	 */
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
-	}
-
-	/**
-	 * @return the coverId
-	 */
-	public Long getCoverId() {
-		return coverId;
-	}
-	/**
-	 * @param coverId the coverId to set
-	 */
-	public void setCoverId(Long coverId) {
-		this.coverId = coverId;
 	}
 	/**
 	 * @return the senders

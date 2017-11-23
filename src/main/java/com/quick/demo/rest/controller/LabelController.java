@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.LabelService;
 import com.quick.demo.db.entity.LabelEntity;
+import com.quick.demo.db.entity.dto.Label;
 
 @RestController
-@RequestMapping("/api/label")
+@RequestMapping("/api/labels")
 public class LabelController {
 
 	@Autowired
@@ -27,11 +29,16 @@ public class LabelController {
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<LabelEntity> getLabels() {
-		List<LabelEntity> labelsDTO = new ArrayList<LabelEntity>();
+	@CrossOrigin(origins = "http://localhost:3000")
+    public @ResponseBody List<Label> getLabels() {
+		List<LabelEntity> labels = labelService.allLabels();
+		List<Label> labelsDTO = new ArrayList<Label>();
+		for (LabelEntity label : labels) {
+			labelsDTO.add(new Label(label));
+		}
 		return labelsDTO;
 	}
-	
+
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
@@ -49,7 +56,7 @@ public class LabelController {
 	public void createLabel(@RequestBody LabelEntity labelDTO) {
 		LabelEntity label = new LabelEntity();
 		label.setName(labelDTO.getName());
-		label.setMail(labelDTO.getMail());
+		label.setEmail(labelDTO.getEmail());
 		labelService.createLabel(label);
 	}
 

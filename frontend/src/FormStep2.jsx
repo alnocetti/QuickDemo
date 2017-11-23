@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import ReactFilestack from 'filestack-react';
 import TextField from './TextField';
+import dataStore from './dataStore';
+import store from './store';
 
 export default class FormStep2 extends React.Component {
   static fileStackApiKey = 'AYhVpjHxIRRKXmnawND6nz';
@@ -10,9 +12,34 @@ export default class FormStep2 extends React.Component {
     accept: ['audio/*']
   };
 
+  state = {
+    demo: store.getDemo()
+  };
+
+  onFieldChange(field, event) {
+    event.preventDefault();
+    const {demo} = this.state;
+    demo[field] = event.target.value;
+    this.setState({demo});
+  }
+
+  onNextClick(event) {
+    event.preventDefault();
+    // TODO: validate
+    store.setDemo(this.state.demo);
+    this.props.router.push('/step-three');
+  }
+
   onUploadSuccess(result) {
-    console.log(result.filesUploaded);
-    // TODO: display that the file was successfully uploaded
+    if (result.filesUploaded && result.filesUploaded.length !== 1) {
+      // TODO: show error saying that we support only one file
+      return;
+    }
+
+    const fileId = result.filesUploaded[0].handle;
+    const {demo} = this.state;
+    demo.fileId = fileId;
+    this.setState({demo});
   }
 
   onUploadError() {
@@ -20,6 +47,7 @@ export default class FormStep2 extends React.Component {
   }
 
   render() {
+    const {demo} = this.state;
     return (
       <section className="fdb-block">
         <div className="container">
@@ -48,15 +76,23 @@ export default class FormStep2 extends React.Component {
               />
               <div className="row align-items-center">
                 <div className="col mt-4">
-                  <TextField id="track-name" type="text" label="Track Name (e.g. The Final Countdown)"/>
+                  <TextField id="track-name" type="text" label="Track Name (e.g. The Final Countdown)"
+                             value={demo.name} onChange={this.onFieldChange.bind(this, 'name')}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <TextField id="track-genre" type="text" label="Track Genre (e.g. Tech House)"/>
+                  <select className="form-control" name="track-genre" style={{height: 48}} value={demo.genreId}
+                          onChange={this.onFieldChange.bind(this, 'genreId')}>
+                    <option value="0">- Genre -</option>
+                    {
+                      dataStore.genres.map(g => <option key={g.genreId} value={g.genreId}>{g.name}</option>)
+                    }
+                  </select>
                 </div>
                 <div className="col">
-                  <TextField id="year" type="text" label="Year of Production (e.g. 2017)"/>
+                  <TextField id="year" type="text" label="Year of Production (e.g. 2017)"
+                             value={demo.year} onChange={this.onFieldChange.bind(this, 'year')}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
@@ -67,7 +103,7 @@ export default class FormStep2 extends React.Component {
                 </div>
                 <div className="col">
                   <div className="d-flex justify-content-end">
-                    <Link to="/step-three" className="btn mt-4">Next</Link>
+                    <button className="btn mt-4" onClick={this.onNextClick.bind(this)}>Next</button>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,7 @@
 package com.quick.demo.db.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,8 @@ public interface DemoRepository  extends JpaRepository<DemoEntity, Long>{
 	 */
 	@Query("SELECT count(*) FROM DemoEntity d")
 	public Integer countDemo();
+
+	@Query("SELECT d FROM DemoEntity d, SendEntity s WHERE d.demoId = s.demo.demoId AND s.response = 'PENDING'")
+	public List<DemoEntity> undeliveryDemos();
 	
 }

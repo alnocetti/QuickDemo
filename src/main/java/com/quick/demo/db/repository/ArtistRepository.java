@@ -13,7 +13,7 @@ import com.quick.demo.db.entity.ArtistEntity;
  */
 @Repository
 @Transactional
-public interface ArtistRepository  extends JpaRepository<ArtistEntity, Long>{
+public interface ArtistRepository extends JpaRepository<ArtistEntity, Long>{
 
 	/**
 	 * Gets the availability of an user alias.

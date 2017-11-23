@@ -13,36 +13,36 @@ import com.quick.demo.db.entity.LabelEntity;
  * @author huicha
  *
  */
-public class GenderDTO {
+public class Genre {
 
-	private Long genderId;
+	private Long genreId;
 	private String name;
 	private List<Long> labels;
 	
-	public GenderDTO() {
+	public Genre() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public GenderDTO(GenreEntity gender) {
-		this.setGenderId(gender.getGenreId());
-		this.setName(gender.getName());
+	public Genre(GenreEntity genre) {
+		this.setGenreId(genre.getGenreId());
+		this.setName(genre.getName());
 		List<Long> ids = new ArrayList<Long>();
-		for (LabelEntity label : gender.getLabels()){
+		for (LabelEntity label : genre.getLabels()){
 			ids.add(label.getLabelId());
 		}
 		this.setLabels(ids);
 	}
 	/**
-	 * @return the genderId
+	 * @return the genreId
 	 */
-	public Long getGenderId() {
-		return genderId;
+	public Long getGenreId() {
+		return genreId;
 	}
 	/**
-	 * @param genderId the genderId to set
+	 * @param genreId the genreId to set
 	 */
-	public void setGenderId(Long genderId) {
-		this.genderId = genderId;
+	public void setGenreId(Long genreId) {
+		this.genreId = genreId;
 	}
 	/**
 	 * @return the name

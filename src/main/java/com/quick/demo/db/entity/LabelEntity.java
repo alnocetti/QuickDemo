@@ -39,8 +39,8 @@ public class LabelEntity implements Serializable {
 	private Long labelId;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "mail", nullable = false)
-	private String mail;
+	@Column(name = "email", nullable = false)
+	private String email;
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "label_genre", joinColumns = {
 				@JoinColumn(name = "labelId", nullable = false, updatable = false) 
@@ -48,7 +48,7 @@ public class LabelEntity implements Serializable {
 			inverseJoinColumns = { 
 				@JoinColumn(name = "genreId", nullable = false, updatable = false) 
 			})
-	private List<GenreEntity> genders;	
+	private List<GenreEntity> genres;	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
@@ -84,14 +84,14 @@ public class LabelEntity implements Serializable {
 	/**
 	 * @return the mail
 	 */
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param mail the mail to set
 	 */
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String mail) {
+		this.email = mail;
 	}
 	/**
 	 * @return the name
@@ -106,16 +106,16 @@ public class LabelEntity implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * @return the genders
+	 * @return the genres
 	 */
-	public List<GenreEntity> getGenders() {
-		return genders;
+	public List<GenreEntity> getGenres() {
+		return genres;
 	}
 	/**
-	 * @param genders the genders to set
+	 * @param genres the genres to set
 	 */
-	public void setGenders(List<GenreEntity> genders) {
-		this.genders = genders;
+	public void setGenres(List<GenreEntity> genres) {
+		this.genres = genres;
 	}
 	
 }

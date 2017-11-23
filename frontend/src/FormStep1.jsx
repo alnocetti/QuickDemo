@@ -1,25 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router';
 import TextField from './TextField';
+import store from './store';
 
 export default class FormStep1 extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      realName: '',
-      artistName: '',
-      email: '',
-      birthday: '',
-    };
-  }
+  state = {
+    artist: store.getArtist()
+  };
 
   onFieldChange(field, event) {
     event.preventDefault();
-    this.setState({[field]: event.target.value});
+    const {artist} = this.state;
+    artist[field] = event.target.value;
+    this.setState({artist});
+  }
+
+  onNextClick(event) {
+    event.preventDefault();
+    // TODO: validate
+    store.setArtist(this.state.artist);
+    this.props.router.push('/step-two');
   }
 
   render() {
-    const state = this.state;
+    const {artist} = this.state;
     return (
       <section className="fdb-block">
         <div className="container">
@@ -33,38 +36,35 @@ export default class FormStep1 extends React.Component {
               </div>
               <div className="row align-items-center">
                 <div className="col mt-4">
-                  <TextField id="real-name" type="text" label="Your Real Name" value={state.realName}
+                  <TextField id="real-name" type="text" label="Your Real Name" value={artist.realName}
                              onChange={this.onFieldChange.bind(this, 'realName')}/>
                 </div>
               </div>
               <div className="row align-items-center">
                 <div className="col mt-4">
-                  <TextField id="artist-name" type="text" label="Your Artist Name" value={state.artistName}
+                  <TextField id="artist-name" type="text" label="Your Artist Name" value={artist.artistName}
                              onChange={this.onFieldChange.bind(this, 'artistName')}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <TextField id="email" type="email" label="Your Email" value={state.email}
+                  <TextField id="email" type="email" label="Your Email" value={artist.email}
                              onChange={this.onFieldChange.bind(this, 'email')}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <TextField id="birthday" type="date" label="Your Birthday" value={state.birthday}
+                  <TextField id="birthday" type="date" label="Your Birthday" value={artist.birthday}
                              onChange={this.onFieldChange.bind(this, 'birthday')}/>
                 </div>
               </div>
-              <div className="row justify-content-start mt-4">
+              <div className="row text-center justify-content-center mt-4 mb-0">
+                <p className="text">We promise we'll keep your music safe.</p>
+              </div>
+              <div className="row justify-content-start mt-0">
                 <div className="col">
-                  <div className="form-check">
-                    <label className="form-check-label">
-                      <input type="checkbox" className="form-check-input"/>
-                      I Read and Accept <Link to="/terms-and-conditions">Terms and Conditions</Link>
-                    </label>
-                  </div>
                   <div className="d-flex justify-content-end">
-                    <Link to="/step-two" className="btn mt-4">Next</Link>
+                    <button className="btn" onClick={this.onNextClick.bind(this)}>Next</button>
                   </div>
                 </div>
               </div>

@@ -54,4 +54,9 @@ public class SendServiceImpl implements SendService {
 		sendRepository.save(entity);
 	}
 
+	@Override
+	public void update(SendEntity sendEntity) {
+		sendRepository.saveAndFlush(sendEntity);
+	}
+
 }

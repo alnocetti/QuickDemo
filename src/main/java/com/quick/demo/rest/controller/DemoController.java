@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,38 +17,47 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.ArtistService;
 import com.quick.demo.back.service.DemoService;
-import com.quick.demo.back.service.GenderService;
+import com.quick.demo.back.service.GenreService;
 import com.quick.demo.back.service.LabelService;
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.ArtistEntity;
 import com.quick.demo.db.entity.DemoEntity;
 import com.quick.demo.db.entity.GenreEntity;
+import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.Demo;
 import com.quick.demo.db.entity.dto.Label;
 import com.quick.demo.db.entity.dto.UploadDemo;
+import com.quick.demo.messages.bean.DemoSendedEmail;
+import com.quick.demo.messages.bean.LabelReviewEmail;
+import com.quick.demo.messages.receive.MessageReceiver;
 
 @RestController
-@RequestMapping("/api/demo")
+@RequestMapping("/api/demos")
 public class DemoController {
 
 	@Autowired
 	private DemoService demoService;
 	@Autowired
-	private GenderService genderService;
+	private GenreService genreService;
 	@Autowired
 	private LabelService labelService;
 	@Autowired
 	private ArtistService artistService;
 	@Autowired
 	private SendService sendService;
+	@Autowired
+	private JmsMessagingTemplate jmsMessagingTemplate;
 	
 	@RequestMapping(value = "",
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<DemoEntity> getDemos() {
-		List<DemoEntity> demos = demoService.allDemos();
-		List<DemoEntity> demosDTO = new ArrayList<DemoEntity>();
+    public @ResponseBody List<Demo> getDemos() {
+		List<Demo> demosDTO = new ArrayList<Demo>();
+		for (DemoEntity demo : demoService.allDemos()){
+			demosDTO.add(new Demo(demo));
+		}
 		return demosDTO;
 	}
 	
@@ -54,31 +65,42 @@ public class DemoController {
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody DemoEntity getDemo(@PathVariable("id") Long id) {
-		System.out.println("Get demo with id: " + id);
-		DemoEntity demo = demoService.findOne(id);
-		return null;
+	public @ResponseBody Demo getDemo(@PathVariable("id") Long id) {
+		return new Demo(demoService.findOne(id));
 	}
-	
+
 	@RequestMapping(value = "",
             method = RequestMethod.POST,
             consumes = {"application/json"},
             produces = {"application/json"})
-    @ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.CREATED)
+	@CrossOrigin(origins = "http://localhost:3000")
 	public void createDemo(@RequestBody UploadDemo uploadDemo) {
-		GenreEntity gender = genderService.findOne(uploadDemo.getDemo().getGenreId()); 
+		GenreEntity genre = genreService.findOne(uploadDemo.getDemo().getGenreId()); 
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
-		demoEntity.setGender(gender);
-		//demoService.createDemo(demoEntity);
+		demoEntity.setGenre(genre);
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
 		artist.getDemos().add(demoEntity);
 		artistService.createArtist(artist);
+		demoEntity.setArtist(artist);
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);
-			sendEntity.setLabel(labelService.findOne(label.getLabelId()));
+			LabelEntity labelEntity = label.getLabelId() != null ? labelService.findOne(label.getLabelId()) : null;
+			if (labelEntity == null){
+				labelEntity = new LabelEntity();
+				labelEntity.setName(label.getName());
+				labelEntity.setEmail(label.getEmail());
+				labelService.createLabel(labelEntity);
+			}
+			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
+			LabelReviewEmail labelEmail = new LabelReviewEmail(labelEntity.getEmail());
+			labelEmail.setTransaction(sendEntity.getSendId());
+			this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 		}
+		DemoSendedEmail demoSendedEmail = new DemoSendedEmail(artist.getEmail());
+		this.jmsMessagingTemplate.convertAndSend(MessageReceiver.DEMO_SENDED_QUEUE, demoSendedEmail);
 	}
 
 	@RequestMapping(value = "/{id}",

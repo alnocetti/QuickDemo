@@ -6,6 +6,8 @@ package com.quick.demo.db.entity.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.quick.demo.db.entity.LabelEntity;
+
 /**
  * @author huicha
  *
@@ -14,19 +16,19 @@ public class Label {
 
 	private Long labelId;
 	private String name;
-	private String mail;
-	private List<Long> genders;
+	private String email;
+	private List<Long> genres;
 	
 	public Label() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Label(Label label) {
+
+	public Label(LabelEntity label) {
 		this.setLabelId(label.getLabelId());
 		this.setName(label.getName());
-		this.setMail(label.getMail());
+		this.setEmail(label.getEmail());
 		List<Long> ids = new ArrayList<Long>();
-		this.setGenders(ids);
+		this.setGenres(ids);
 	}
 	/**
 	 * @return the labelId
@@ -43,14 +45,14 @@ public class Label {
 	/**
 	 * @return the mail
 	 */
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 	/**
 	 * @param mail the mail to set
 	 */
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String mail) {
+		this.email = mail;
 	}
 	/**
 	 * @return the name
@@ -65,16 +67,16 @@ public class Label {
 		this.name = name;
 	}
 	/**
-	 * @return the genders
+	 * @return the genres
 	 */
-	public List<Long> getGenders() {
-		return genders;
+	public List<Long> getGenres() {
+		return genres;
 	}
 	/**
-	 * @param genders the genders to set
+	 * @param genres the genres to set
 	 */
-	public void setGenders(List<Long> genders) {
-		this.genders = genders;
+	public void setGenres(List<Long> genres) {
+		this.genres = genres;
 	}
 	
 }

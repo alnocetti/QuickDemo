@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,38 +14,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quick.demo.back.service.GenderService;
+import com.quick.demo.back.service.GenreService;
 import com.quick.demo.db.entity.GenreEntity;
-import com.quick.demo.db.entity.dto.GenderDTO;
+import com.quick.demo.db.entity.dto.Genre;
 
 @RestController
-@RequestMapping("/api/genders")
-public class GenderController {
+@RequestMapping("/api/genres")
+public class GenreController {
 
 	@Autowired
-	private GenderService genderService;
+	private GenreService genreService;
 	
 	@RequestMapping(value = "",
             method = RequestMethod.GET,
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody List<GenderDTO> getGenders() {
-		List<GenreEntity> genders = genderService.allGenders();
-		List<GenderDTO> gendersDTO = new ArrayList<GenderDTO>();
-		for (GenreEntity gender : genders){
-			gendersDTO.add(new GenderDTO(gender));
+	@CrossOrigin(origins = "http://localhost:3000")
+    public @ResponseBody List<Genre> getGenres() {
+		List<GenreEntity> genres = genreService.allGenres();
+		List<Genre> genresDTO = new ArrayList<Genre>();
+		for (GenreEntity genre : genres){
+			genresDTO.add(new Genre(genre));
 		}
-		return gendersDTO;
+		return genresDTO;
 	}
 	
 	@RequestMapping(value = "/{id}",
 	    method = RequestMethod.GET,
 	    produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody GenderDTO getGender(@PathVariable("id") Long id) {
-		System.out.println("Get gender with id: " + id);
-		GenreEntity gender = genderService.findOne(id);
-		return new GenderDTO(gender);
+	public @ResponseBody Genre getGenre(@PathVariable("id") Long id) {
+		System.out.println("Get genre with id: " + id);
+		GenreEntity genre = genreService.findOne(id);
+		return new Genre(genre);
 	}
 	
 	@RequestMapping(value = "",
@@ -52,10 +54,10 @@ public class GenderController {
             consumes = {"application/json"},
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-	public void createGender(@RequestBody GenderDTO genderDTO) {
-		GenreEntity gender = new GenreEntity();
-		gender.setName(genderDTO.getName());
-		genderService.createGender(gender);
+	public void createGenre(@RequestBody Genre genreDTO) {
+		GenreEntity genre = new GenreEntity();
+		genre.setName(genreDTO.getName());
+		genreService.createGenre(genre);
 	}
 
 	@RequestMapping(value = "/{id}",
@@ -63,8 +65,8 @@ public class GenderController {
             produces = {"application/json"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
-		System.out.println("Delete gender with id: " + id);
-		genderService.deleteById(id);
+		System.out.println("Delete genre with id: " + id);
+		genreService.deleteById(id);
 	}
 	
 }
