@@ -79,25 +79,28 @@ export default class FormStep3 extends React.Component {
                           onChange={this.onLabelsChange.bind(this)} multi/>
                 </div>
               </div>
-              <div className="row align-items-center">
-                <div className="col mt-4">
+              <div className="row text-center justify-content-center mt-4 mb-0">
+                <p className="text">Can't find the label you're looking for? No problem! Add it yourself.</p>
+              </div>
+              <div className="row align-items-center mt-0">
+                <div className="col">
                   <TextField id="new-label-name" type="text" label="Label Name"
                              value={newLabel.name} onChange={this.onNewLabelFieldChange.bind(this, 'name')}/>
                 </div>
-                <div className="col mt-4">
+                <div className="col">
                   <TextField id="new-label-email" type="text" label="Label Email"
                              value={newLabel.email} onChange={this.onNewLabelFieldChange.bind(this, 'email')}/>
                 </div>
-                <div className="col mt-4">
-                  <button className="btn" style={{width: '100%'}} type="button"
+                <div className="col">
+                  <button className="btn btn-empty" style={{width: '100%'}} type="button"
                           onClick={this.onAddLabelClick.bind(this)}>Add Label
                   </button>
                 </div>
               </div>
               <div className="row text-center justify-content-center mt-4">
                 <div className="col">
-                  <p className="text">Look for the label information on <a href="https://labelsbase.net"
-                                                                           target="_blank">Labels Base</a>.</p>
+                  <p className="text">Look for labels information on <a href="https://labelsbase.net"
+                                                                        target="_blank">Labels Base</a>.</p>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
