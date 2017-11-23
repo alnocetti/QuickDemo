@@ -69,7 +69,7 @@ export default class FormStep3 extends React.Component {
             <div className="col-12 col-md-8 col-lg-8 col-xl-6">
               <div className="row">
                 <div className="col text-center">
-                  <h1>Label</h1>
+                  <h1>Labels</h1>
                   <p className="text-h3">Last step! Please, select one or more labels.</p>
                 </div>
               </div>
