@@ -98,10 +98,8 @@ export default class FormStep3 extends React.Component {
                 </div>
               </div>
               <div className="row text-center justify-content-center mt-4">
-                <div className="col">
-                  <p className="text">Look for labels information on <a href="https://labelsbase.net"
-                                                                        target="_blank">Labels Base</a>.</p>
-                </div>
+                <p className="text">Look for labels information on <a href="https://labelsbase.net"
+                                                                      target="_blank">Labels Base</a>.</p>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">

@@ -58,15 +58,13 @@ export default class FormStep1 extends React.Component {
                              onChange={this.onFieldChange.bind(this, 'birthday')}/>
                 </div>
               </div>
-              <div className="row justify-content-start mt-4">
+              <div className="row text-center justify-content-center mt-4 mb-0">
+                <p className="text">We promise we'll keep your music safe.</p>
+              </div>
+              <div className="row justify-content-start mt-0">
                 <div className="col">
-                  <div className="form-check">
-                    <label className="form-check-label">
-                      We promise we'll keep your music private.
-                    </label>
-                  </div>
                   <div className="d-flex justify-content-end">
-                    <button className="btn mt-4" onClick={this.onNextClick.bind(this)}>Next</button>
+                    <button className="btn" onClick={this.onNextClick.bind(this)}>Next</button>
                   </div>
                 </div>
               </div>
