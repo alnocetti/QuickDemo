@@ -3,8 +3,23 @@
  */
 package com.quick.demo.web.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author cristianhuichaqueo
@@ -14,28 +29,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexWebController {
 
 	@RequestMapping("/")
-    public String home() {
-        return dashboard();
-    }
-	
+	public String home() {
+		return dashboard();
+	}
+
 	@RequestMapping("/demo")
-    public String demo() {
-        return "/views/demo";
-    }
-	
+	public String demo() {
+		return "/views/demo";
+	}
+
 	@RequestMapping("/dashboards-project")
-    public String dashboard() {
-        return "/views/dashboards-project";
-    }
-	
+	public String dashboard() {
+		return "/views/dashboards-project";
+	}
+
 	@RequestMapping("/users")
-    public String users() {
-        return "/views/users";
-    }
-	
+	public String users() {
+		return "/views/users";
+	}
+
 	@RequestMapping("/profile")
-    public String profile() {
-        return "/views/profile";
-    }
-	
+	public String profile() {
+		return "/views/profile";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/mailOpenTracking", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> mailOpenTracking(String id) throws IOException {
+		
+		URL r = this.getClass().getResource("/");
+		String decoded = URLDecoder.decode(r.getFile(), "UTF-8");
+
+		if (decoded.startsWith("/")) {
+			decoded = decoded.replaceFirst("/", "");
+		}
+		File in = new File(decoded,"/static/Images/0015_0.jpg");
+		InputStream strim = new FileInputStream(in);
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(IOUtils.toByteArray(strim), headers, HttpStatus.CREATED);
+
+	}
+
+	@RequestMapping("/listenTracking")
+	public String listenTracking() {
+		return "/views/profile";
+	}
+
 }
