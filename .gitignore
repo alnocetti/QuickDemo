@@ -32,6 +32,8 @@ bin/
 
 # Ignore all `library.jar` in `bin` dir
 
+.env
+
 **/bin/library.jar
 /target/
 /bin/
