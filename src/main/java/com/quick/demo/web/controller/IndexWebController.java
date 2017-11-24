@@ -15,7 +15,11 @@ public class IndexWebController {
 
 	@RequestMapping("/")
     public String home() {
-        return dashboard();
+        return index();
+    }
+	
+    public String index() {
+        return "index.html";
     }
 	
 	@RequestMapping("/demo")
@@ -23,7 +27,7 @@ public class IndexWebController {
         return "/views/demo";
     }
 	
-	@RequestMapping("/dashboards-project")
+	@RequestMapping("/dashboard")
     public String dashboard() {
         return "/views/dashboards-project";
     }
