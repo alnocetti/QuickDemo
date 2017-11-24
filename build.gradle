@@ -41,6 +41,11 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '1.5.6.RELEASE'
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+	// https://mvnrepository.com/artifact/org.springframework/spring-jms
+	compile group: 'org.springframework', name: 'spring-jms', version: '4.3.12.RELEASE'
+
+	
+	
 	
 	compile("org.jboss.resteasy:resteasy-client:3.1.0.Final")
 	compile("org.jboss.resteasy:resteasy-jackson2-provider:3.1.0.Final")

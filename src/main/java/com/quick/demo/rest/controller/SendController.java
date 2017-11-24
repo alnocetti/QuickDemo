@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.quick.demo.back.service.SendService;
-import com.quick.demo.db.entity.Response;
+import com.quick.demo.db.entity.Status;
 import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.db.entity.dto.Send;
 
@@ -55,7 +55,7 @@ public class SendController {
 	public void updateSend(@PathVariable("id") Long id, @RequestBody String responseStatus) {
 		SendEntity sendEntity = sendService.findOne(id);
 		if (sendEntity != null) {
-			sendEntity.setResponse(Response.valueOf(responseStatus));
+			sendEntity.setResponse(Status.valueOf(responseStatus));
 			sendService.update(sendEntity);
 		}
 	}

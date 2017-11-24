@@ -37,7 +37,14 @@ public class SendEntity implements Serializable {
 	@Column(unique = true, nullable = false)
 	private Long sendId;
 	@Enumerated(EnumType.STRING)
-	private Response response;
+	private Status status;
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 	@ManyToOne
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private DemoEntity demo;
@@ -50,7 +57,7 @@ public class SendEntity implements Serializable {
 	
 	public SendEntity() {
 		this.creationDate = new Date();
-		this.setResponse(Response.PENDING);
+		this.setStatus(Status.PENDING);
 	}
 	
 	/**
@@ -104,14 +111,6 @@ public class SendEntity implements Serializable {
 	/**
 	 * @return the response
 	 */
-	public Response getResponse() {
-		return response;
-	}
-	/**
-	 * @param response the response to set
-	 */
-	public void setResponse(Response response) {
-		this.response = response;
-	} 
+	
 	
 }

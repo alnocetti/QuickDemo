@@ -7,7 +7,7 @@ package com.quick.demo.messages.bean;
  * @author huicha
  *
  */
-public class DemoSendedEmail implements EmailTemplate {
+public class DemoListenedEmail implements EmailTemplate {
 
 	/**
 	 * 
@@ -16,18 +16,25 @@ public class DemoSendedEmail implements EmailTemplate {
 	private String to;
 	private String subjet;
 	private String body;
-	private Long idDemo;
-
+	private long sendId;
 	
 	
+	public DemoListenedEmail() {
 	
-	public DemoSendedEmail() {
-		
+	}
+	
+	public DemoListenedEmail(String to) {
+		this.to = to;
 	}
 
+	public DemoListenedEmail(String to, String body, String subjet) {
+		this.to = to;
+		this.body = body;
+		this.subjet = subjet;
+	}
 
-	public DemoSendedEmail(Long idDemo) {
-		this.setIdDemo(idDemo);
+	public DemoListenedEmail(Long sendId2) {
+		this.sendId= sendId2;
 	}
 
 	public String getTo() {
@@ -59,13 +66,14 @@ public class DemoSendedEmail implements EmailTemplate {
 		return String.format("Email{to=%s, body=%s}", getTo(), getBody());
 	}
 
-
-	public Long getIdDemo() {
-		return idDemo;
+	
+	public long getSendId() {
+		return sendId;
 	}
 
-
-	public void setIdDemo(Long idDemo) {
-		this.idDemo = idDemo;
+	public void setSendId(long sendId) {
+		this.sendId = sendId;
 	}
+
+	
 }

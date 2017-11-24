@@ -14,7 +14,8 @@ public class LabelReviewEmail implements EmailTemplate {
 	private String to;
 	private String subjet;
 	private String body;
-	private Long transaction;
+	private Long sendId;
+	
 
 	public LabelReviewEmail() {
 	}
@@ -57,18 +58,15 @@ public class LabelReviewEmail implements EmailTemplate {
 		return String.format("Email{to=%s, body=%s}", getTo(), getBody());
 	}
 
-	/**
-	 * @return the transaction
-	 */
-	public Long getTransaction() {
-		return transaction;
+	public Long getSendId() {
+		return sendId;
 	}
 
-	/**
-	 * @param transaction the transaction to set
-	 */
-	public void setTransaction(Long transaction) {
-		this.transaction = transaction;
+	public void setSendId(Long sendId) {
+		this.sendId = sendId;
 	}
+
+
+
 
 }

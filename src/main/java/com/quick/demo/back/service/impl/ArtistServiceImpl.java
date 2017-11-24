@@ -52,8 +52,8 @@ public class ArtistServiceImpl implements ArtistService {
 	}
 
 	@Override
-	public void createArtist(ArtistEntity entity) {
-		accountsRepo.save(entity);
+	public ArtistEntity createArtist(ArtistEntity entity) {
+		return accountsRepo.save(entity);
 	}
 	
 }

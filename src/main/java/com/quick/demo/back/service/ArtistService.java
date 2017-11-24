@@ -4,7 +4,7 @@ import com.quick.demo.db.entity.ArtistEntity;
 
 public interface ArtistService {
 
-	public void createArtist(ArtistEntity entity);
+	public ArtistEntity createArtist(ArtistEntity entity);
 	
 	/**
 	 * Gets an id by the nickname

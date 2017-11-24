@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import com.quick.demo.messages.bean.DemoListenedEmail;
+import com.quick.demo.messages.bean.DemoOpenedEmail;
 import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.LabelReviewEmail;
+import com.quick.demo.messages.receive.processor.DemoListenedTemplateProcessor;
+import com.quick.demo.messages.receive.processor.DemoOpenedTemplateProcessor;
 import com.quick.demo.messages.receive.processor.DemoSendedTemplateProcessor;
 import com.quick.demo.messages.receive.processor.LabelReviewTemplateProcessor;
 
@@ -19,28 +23,54 @@ public class MessageReceiver {
 	public static final String DEMO_SENDED_QUEUE = "demo_sended";
 	// email to label
 	public static final String LABEL_REVIEW_QUEUE = "label_review";
-	
+	// email opened
+	public static final String DEMO_OPENED_QUEUE = "demo_opened";
+	// email listened
+	public static final String DEMO_LISTENED_QUEUE = "demo_listened";
+
 	@Autowired
-	private LabelReviewTemplateProcessor labelReviewTemplateProcessor; 
-    @Autowired
-    private DemoSendedTemplateProcessor demoSendedTemplateProcessor;
-	
-    @JmsListener(destination = MessageReceiver.DEMO_SENDED_QUEUE, containerFactory = "quickDemoFactory")
-    public void receiveDemoSendedMessage(DemoSendedEmail labelEmail) {
-	    try {
-	    	demoSendedTemplateProcessor.send(labelEmail);
-	    } catch (Exception e) {
-	    	logger.error("ERROR AL INTENTAR PROCESAR DEMO_SENDED_QUEUE: ", e);
-	    }
-    }
-    
-    @JmsListener(destination = MessageReceiver.LABEL_REVIEW_QUEUE, containerFactory = "quickDemoFactory")
-    public void receiveLabelReviewMessage(LabelReviewEmail labelEmail) {
-	    try {
-	    	labelReviewTemplateProcessor.send(labelEmail);
-	    } catch (Exception e) {
-	    	logger.error("ERROR AL INTENTAR PROCESAR LABEL_REVIEW_QUEUE: ", e);
-	    }
-    }
-    
+	private LabelReviewTemplateProcessor labelReviewTemplateProcessor;
+	@Autowired
+	private DemoSendedTemplateProcessor demoSendedTemplateProcessor;
+	@Autowired
+	private DemoOpenedTemplateProcessor demoOpenedTemplateProcessor;
+	@Autowired
+	private DemoListenedTemplateProcessor demoListenedTemplateProcessor;
+
+	@JmsListener(destination = MessageReceiver.DEMO_SENDED_QUEUE, containerFactory = "quickDemoFactory")
+	public void receiveDemoSendedMessage(DemoSendedEmail labelEmail) {
+		try {
+			demoSendedTemplateProcessor.send(labelEmail);
+		} catch (Exception e) {
+			logger.error("ERROR AL INTENTAR PROCESAR DEMO_SENDED_QUEUE: ", e);
+		}
+	}
+
+	@JmsListener(destination = MessageReceiver.LABEL_REVIEW_QUEUE, containerFactory = "quickDemoFactory")
+	public void receiveLabelReviewMessage(LabelReviewEmail labelEmail) {
+		try {
+			labelReviewTemplateProcessor.send(labelEmail);
+		} catch (Exception e) {
+			logger.error("ERROR AL INTENTAR PROCESAR LABEL_REVIEW_QUEUE: ", e);
+		}
+	}
+
+	@JmsListener(destination = MessageReceiver.DEMO_OPENED_QUEUE, containerFactory = "quickDemoFactory")
+	public void receiveLabelReviewMessage(DemoOpenedEmail demoEmail) {
+		try {
+			demoOpenedTemplateProcessor.send(demoEmail);
+		} catch (Exception e) {
+			logger.error("ERROR AL INTENTAR PROCESAR DEMO_OPENED_QUEUE: ", e);
+		}
+	}
+
+	@JmsListener(destination = MessageReceiver.DEMO_LISTENED_QUEUE, containerFactory = "quickDemoFactory")
+	public void receiveLabelReviewMessage(DemoListenedEmail demoEmail) {
+		try {
+			demoListenedTemplateProcessor.send(demoEmail);
+		} catch (Exception e) {
+			logger.error("ERROR AL INTENTAR PROCESAR DEMO_LISTENED_QUEUE: ", e);
+		}
+	}
+
 }

@@ -7,8 +7,8 @@ package com.quick.demo.db.entity;
  * @author huicha
  *
  */
-public enum Response {
+public enum Status {
 
-	PENDING, DELIVERED, ACCEPTED, REFUSED;
+	PENDING, DELIVERED, OPENED, LISTENED, ACCEPTED, REFUSED;
 	
 }

@@ -6,6 +6,7 @@ package com.quick.demo.db.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -49,8 +51,9 @@ public class ArtistEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "demoId", cascade = CascadeType.PERSIST)
-	private Set<DemoEntity> demos = new HashSet<DemoEntity>(0);
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="artistId", referencedColumnName="artistId")
+	private List<DemoEntity> demos ;
 	
 	public ArtistEntity() {
 		this.creationDate = new Date();
@@ -151,14 +154,14 @@ public class ArtistEntity implements Serializable {
 	/**
 	 * @return the demos
 	 */
-	public Set<DemoEntity> getDemos() {
+	public List<DemoEntity> getDemos() {
 		return demos;
 	}
 
 	/**
 	 * @param demos the demos to set
 	 */
-	public void setDemos(Set<DemoEntity> demos) {
+	public void setDemos(List<DemoEntity> demos) {
 		this.demos = demos;
 	}
 

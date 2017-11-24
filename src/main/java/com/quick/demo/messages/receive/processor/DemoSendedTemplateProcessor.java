@@ -7,10 +7,15 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.quick.demo.back.service.DemoService;
+import com.quick.demo.db.entity.DemoEntity;
+import com.quick.demo.db.entity.LabelEntity;
+import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.EmailTemplate;
 import com.quick.demo.thirdparty.sendgrid.SendEmailSendGridHelper;
@@ -36,6 +41,9 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 	@Value("${sendgrid.template.demosended}")
     private String templateId;
 	
+	
+	@Autowired
+	private DemoService demoService;
 	/**
 	 * @param templateId the templateId to set
 	 */
@@ -55,8 +63,16 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 		Email to = new Email(email.getTo());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, demoSendedEmail.getSubjet(), to, content);
-		mail.personalization.get(0).addSubstitution("-name-", "Example User");
-		mail.personalization.get(0).addSubstitution("-city-", "Denver");
+		DemoEntity demo = demoService.findOne(demoSendedEmail.getIdDemo());
+		
+		String sellos="";
+		
+		for(SendEntity se : demo.getSenders()){
+			sellos=sellos+"<li>"+se.getLabel().getName()+"</li>";
+		}
+		
+		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
+		mail.personalization.get(0).addSubstitution("-sellos-", sellos);
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());

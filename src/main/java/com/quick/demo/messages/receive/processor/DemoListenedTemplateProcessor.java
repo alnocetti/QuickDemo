@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
 
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.messages.bean.DemoListenedEmail;
+import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.EmailTemplate;
-import com.quick.demo.messages.bean.LabelReviewEmail;
 import com.quick.demo.thirdparty.sendgrid.SendEmailSendGridHelper;
 import com.quick.demo.thirdparty.sendgrid.SendGridTemplate;
 import com.sendgrid.Content;
@@ -32,38 +33,42 @@ import com.sendgrid.SendGrid;
  */
 @Component
 @Scope("singleton")
-public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate{
+public class DemoListenedTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Value("${sendgrid.template.labelreview}")
+	
+	@Value("${sendgrid.template.demolistened}")
     private String templateId;
 	@Autowired
 	private SendService sendService;
+	/**
+	 * @param templateId the templateId to set
+	 */
+	public void setTemplateId(String templateId) {
+		this.templateId = templateId;
+	}
 
 	@Override
 	public String getTemplateId() {
 		return templateId;
 	}
-
+	
 	@Override
 	public void send(EmailTemplate email) throws IOException {
-		LabelReviewEmail labelReviewEmail= (LabelReviewEmail)email; 
-		SendEntity se = sendService.findOne(labelReviewEmail.getSendId());
+		DemoListenedEmail demoListenedEmail= (DemoListenedEmail)email; 
+		SendEntity se = sendService.findOne(demoListenedEmail.getSendId());
 		
 		Email from = new Email(this.getEmailFrom());
-		Email to = new Email(se.getLabel().getEmail());
+		Email to = new Email(se.getDemo().getArtist().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
-		Mail mail = new Mail(from, "Nuevo QuickDemo", to, content);
+		Mail mail = new Mail(from,"Demo Escuchado", to, content);
 		
 		
 		
 		
 		
-		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/mailOpenTracking?id="+se.getSendId());
+		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
-		mail.personalization.get(0).addSubstitution("-artista-", se.getDemo().getArtist().getArtistName());
-		mail.personalization.get(0).addSubstitution("-anoComposicion-", se.getDemo().getYear());
-		mail.personalization.get(0).addSubstitution("-urlDemo-", "http://quickdemo.rarahavis.com/listenTracking?id="+se.getSendId());
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());
@@ -77,9 +82,7 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 			logger.debug("Response body: ", response.getBody());
 			logger.debug("Response headers: ", response.getHeaders());
 			if (response.getStatusCode()==202){
-				SendEntity send = sendService.findOne(labelReviewEmail.getSendId());
-				send.setStatus(com.quick.demo.db.entity.Status.DELIVERED);
-				sendService.update(send);
+				logger.info("email was sucesfully sended");
 			}
 		} catch (IOException ex) {
 			logger.error("Error ocurred when the system sending email to label: ", ex.getMessage());

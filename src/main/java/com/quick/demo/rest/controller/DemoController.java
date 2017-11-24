@@ -80,9 +80,10 @@ public class DemoController {
 		DemoEntity demoEntity = new DemoEntity(uploadDemo.getDemo());
 		demoEntity.setGenre(genre);
 		ArtistEntity artist = new ArtistEntity(uploadDemo.getArtist());
-		artist.getDemos().add(demoEntity);
-		artistService.createArtist(artist);
-		demoEntity.setArtist(artist);
+		List<DemoEntity> listDemos= new ArrayList<DemoEntity>(){{add(demoEntity);}};		
+		artist.setDemos(listDemos);
+		ArtistEntity artistaGuardado= artistService.createArtist(artist);
+		//demoEntity.setArtist(artist);
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);
@@ -96,10 +97,10 @@ public class DemoController {
 			sendEntity.setLabel(labelEntity);
 			sendService.createSend(sendEntity);
 			LabelReviewEmail labelEmail = new LabelReviewEmail(labelEntity.getEmail());
-			labelEmail.setTransaction(sendEntity.getSendId());
+			labelEmail.setSendId(sendEntity.getSendId());
 			this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 		}
-		DemoSendedEmail demoSendedEmail = new DemoSendedEmail(artist.getEmail());
+		DemoSendedEmail demoSendedEmail = new DemoSendedEmail(artistaGuardado.getDemos().get(0).getDemoId());
 		this.jmsMessagingTemplate.convertAndSend(MessageReceiver.DEMO_SENDED_QUEUE, demoSendedEmail);
 	}
 
