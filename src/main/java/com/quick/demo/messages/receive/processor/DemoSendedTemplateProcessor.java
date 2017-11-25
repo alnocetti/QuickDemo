@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.quick.demo.back.service.DemoService;
 import com.quick.demo.db.entity.DemoEntity;
-import com.quick.demo.db.entity.LabelEntity;
 import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.EmailTemplate;
@@ -59,18 +58,15 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 	@Override
 	public void send(EmailTemplate email) throws IOException {
 		DemoSendedEmail demoSendedEmail= (DemoSendedEmail)email; 
+		DemoEntity demo = demoService.findOne(demoSendedEmail.getIdDemo());
 		Email from = new Email(this.getEmailFrom());
-		Email to = new Email(email.getTo());
+		Email to = new Email(demo.getArtist().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, demoSendedEmail.getSubjet(), to, content);
-		DemoEntity demo = demoService.findOne(demoSendedEmail.getIdDemo());
-		
 		String sellos="";
-		
 		for(SendEntity se : demo.getSenders()){
 			sellos=sellos+"<li>"+se.getLabel().getName()+"</li>";
 		}
-		
 		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
 		mail.personalization.get(0).addSubstitution("-sellos-", sellos);
 		mail.setTemplateId(this.getTemplateId());

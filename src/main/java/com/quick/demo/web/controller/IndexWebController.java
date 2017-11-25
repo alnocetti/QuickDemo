@@ -12,7 +12,6 @@ import java.net.URLDecoder;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -85,7 +84,7 @@ public class IndexWebController {
 		if (decoded.startsWith("/")) {
 			decoded = decoded.replaceFirst("/", "");
 		}
-		File in = new File(decoded,"/static/Images/ImagenMailTrackerjpg");
+		File in = new File(decoded,"/static/Images/ImagenMailTracker.jpg");
 		InputStream strim = new FileInputStream(in);
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);

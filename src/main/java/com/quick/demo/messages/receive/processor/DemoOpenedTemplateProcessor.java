@@ -14,9 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.SendEntity;
-import com.quick.demo.db.entity.Status;
 import com.quick.demo.messages.bean.DemoOpenedEmail;
-import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.EmailTemplate;
 import com.quick.demo.thirdparty.sendgrid.SendEmailSendGridHelper;
 import com.quick.demo.thirdparty.sendgrid.SendGridTemplate;

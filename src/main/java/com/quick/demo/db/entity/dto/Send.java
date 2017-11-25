@@ -19,7 +19,7 @@ public class Send implements Serializable {
 	private static final long serialVersionUID = -8323999302370299394L;
 	
 	private Long sendId;
-	private String response;
+	private String status;
 	private Long demoId;
 	private Long labelId;
 	
@@ -30,7 +30,7 @@ public class Send implements Serializable {
 	public Send(SendEntity sendEntity) {
 		this.setDemoId(sendEntity.getDemo().getDemoId());
 		this.setSendId(sendEntity.getSendId());
-		this.setResponse(sendEntity.getResponse().toString());
+		this.setStatus(sendEntity.getStatus().toString());
 		this.setLabelId(sendEntity.getLabel().getLabelId());
 	}
 
@@ -46,18 +46,7 @@ public class Send implements Serializable {
 	public void setSendId(Long sendId) {
 		this.sendId = sendId;
 	}
-	/**
-	 * @return the response
-	 */
-	public String getResponse() {
-		return response;
-	}
-	/**
-	 * @param response the response to set
-	 */
-	public void setResponse(String response) {
-		this.response = response;
-	}
+	
 	/**
 	 * @return the demoId
 	 */
@@ -81,6 +70,14 @@ public class Send implements Serializable {
 	 */
 	public void setLabelId(Long labelId) {
 		this.labelId = labelId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	} 
 	
 }

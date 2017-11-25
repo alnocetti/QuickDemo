@@ -83,7 +83,6 @@ public class DemoController {
 		List<DemoEntity> listDemos= new ArrayList<DemoEntity>(){{add(demoEntity);}};		
 		artist.setDemos(listDemos);
 		ArtistEntity artistaGuardado= artistService.createArtist(artist);
-		//demoEntity.setArtist(artist);
 		for (Label label : uploadDemo.getLabels()){
 			SendEntity sendEntity = new SendEntity();
 			sendEntity.setDemo(demoEntity);

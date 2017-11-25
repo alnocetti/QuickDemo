@@ -28,7 +28,7 @@ public interface SendRepository  extends JpaRepository<SendEntity, Long>{
 	 * Gets the availability of an user alias.
 	 * @return Integer 0 is available - 1 is not available.
 	 */
-	@Query("FROM SendEntity s WHERE s.response = 'PENDING'")
+	@Query("FROM SendEntity s WHERE s.status = 'PENDING'")
 	public List<SendEntity> pendings();
 	
 }

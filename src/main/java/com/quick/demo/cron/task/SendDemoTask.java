@@ -41,7 +41,7 @@ public class SendDemoTask {
 		for (DemoEntity demo : demoService.undeliveryDemos()) {
 			for (SendEntity sendEntity : demo.getSenders()){
 				LabelReviewEmail labelEmail = new LabelReviewEmail(sendEntity.getLabel().getEmail());
-				labelEmail.setTransaction(sendEntity.getSendId());
+				labelEmail.setSendId(sendEntity.getSendId());
 				this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 			}
 		}
