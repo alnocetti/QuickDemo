@@ -2,17 +2,23 @@ import React from 'react';
 import {Link} from 'react-router';
 import Select from 'react-select';
 import _ from 'underscore';
+import validations from './validations';
 import TextField from './TextField';
 import dataStore from './dataStore';
 import store from './store';
 
 export default class FormStep3 extends React.Component {
+  static rules = {
+    labels: [validations.notEmpty],
+  };
+
   state = {
     labels: store.getLabels(),
     newLabel: {
       name: '',
       email: '',
-    }
+    },
+    errors: {},
   };
 
   onNewLabelFieldChange(field, event) {
@@ -23,9 +29,10 @@ export default class FormStep3 extends React.Component {
   }
 
   onLabelsChange(value) {
-    this.setState({
-      labels: value.map(v => _.findWhere(dataStore.labels, {labelId: v.value}))
-    });
+    const labels = value.map(v => _.findWhere(dataStore.labels, {labelId: v.value}));
+    const {errors} = this.state;
+    errors.labels = false;
+    this.setState({labels, errors});
   }
 
   onAddLabelClick(event) {
@@ -48,7 +55,11 @@ export default class FormStep3 extends React.Component {
 
   onSendClick(event) {
     event.preventDefault();
-    // TODO: validate
+
+    if (this.validate(this.state.labels)) {
+      return;
+    }
+
     store.setLabels(this.state.labels);
     dataStore.submit(store.getState())
       .then(() => {
@@ -58,10 +69,17 @@ export default class FormStep3 extends React.Component {
       .catch((err) => console.error(err));
   }
 
+  validate(labels) {
+    const obj = {labels};
+    const errors = validations.validate(obj, FormStep3.rules);
+    this.setState({errors});
+    return Object.keys(errors).length > 0;
+  }
+
   render() {
     const selected = this.state.labels.map(l => ({value: l.labelId, label: l.name}));
     const options = dataStore.labels.map(l => ({value: l.labelId, label: l.name}));
-    const {newLabel} = this.state;
+    const {newLabel, errors} = this.state;
 
     return (
       <section className="fdb-block">
@@ -77,6 +95,7 @@ export default class FormStep3 extends React.Component {
               <div className="row align-items-center mt-4">
                 <div className="col">
                   <Select value={selected} options={options}
+                          style={errors['labels'] ? {borderColor: '#de4d4f'} : {}}
                           onChange={this.onLabelsChange.bind(this)} multi/>
                 </div>
               </div>

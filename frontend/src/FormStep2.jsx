@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ReactFilestack from 'filestack-react';
+import validations from './validations';
 import TextField from './TextField';
 import dataStore from './dataStore';
 import store from './store';
@@ -12,42 +13,64 @@ export default class FormStep2 extends React.Component {
     accept: ['audio/*']
   };
 
+  static rules = {
+    fileId: [validations.notEmpty],
+    name: [validations.notEmpty],
+    genreId: [validations.isNot(0)],
+    year: [validations.isYear],
+  };
+
   state = {
-    demo: store.getDemo()
+    demo: store.getDemo(),
+    errors: {},
   };
 
   onFieldChange(field, event) {
     event.preventDefault();
-    const {demo} = this.state;
+    const {demo, errors} = this.state;
     demo[field] = event.target.value;
-    this.setState({demo});
+    errors[field] = false;
+    this.setState({demo, errors});
   }
 
   onNextClick(event) {
     event.preventDefault();
-    // TODO: validate
+
+    if (this.validate(this.state.demo)) {
+      return;
+    }
+
     store.setDemo(this.state.demo);
     this.props.router.push('/step-three');
   }
 
+  validate(obj) {
+    const errors = validations.validate(obj, FormStep2.rules);
+    this.setState({errors});
+    return Object.keys(errors).length > 0;
+  }
+
   onUploadSuccess(result) {
+    const {demo, errors} = this.state;
+
     if (result.filesUploaded && result.filesUploaded.length !== 1) {
-      // TODO: show error saying that we support only one file
+      errors.fileId = true;
       return;
     }
 
-    const fileId = result.filesUploaded[0].handle;
-    const {demo} = this.state;
-    demo.fileId = fileId;
-    this.setState({demo});
+    demo.fileId = result.filesUploaded[0].handle;
+    errors.fileId = false;
+    this.setState({demo, errors});
   }
 
   onUploadError() {
-    // TODO: display that there was an error uploading the file
+    const {errors} = this.state;
+    errors.fileId = true;
+    this.setState({errors});
   }
 
   render() {
-    const {demo} = this.state;
+    const {demo, errors} = this.state;
     return (
       <section className="fdb-block">
         <div className="container">
@@ -68,7 +91,10 @@ export default class FormStep2 extends React.Component {
                   <div className="row align-items-center">
                     <div className="col mt-4">
                       <div className="d-flex justify-content-center">
-                        <button className="btn btn-block" onClick={onPick}>Choose a file</button>
+                        <button className="btn btn-block"
+                                style={errors['fileId'] ? {backgroundColor: '#de4d4f', borderColor: '#de4d4f'} : {}}
+                                onClick={onPick}>{demo.fileId ? 'File uploaded 👌' : 'Choose a file'}
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -77,12 +103,14 @@ export default class FormStep2 extends React.Component {
               <div className="row align-items-center">
                 <div className="col mt-4">
                   <TextField id="track-name" type="text" label="Track Name (e.g. The Final Countdown)"
-                             value={demo.name} onChange={this.onFieldChange.bind(this, 'name')}/>
+                             value={demo.name} onChange={this.onFieldChange.bind(this, 'name')}
+                             hasError={errors['name']}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">
                 <div className="col">
-                  <select className="form-control" name="track-genre" style={{height: 48}} value={demo.genreId}
+                  <select className="form-control" name="track-genre"
+                          style={errors['genreId'] ? {borderColor: '#de4d4f'} : {}} value={demo.genreId}
                           onChange={this.onFieldChange.bind(this, 'genreId')}>
                     <option value="0">- Genre -</option>
                     {
@@ -92,7 +120,8 @@ export default class FormStep2 extends React.Component {
                 </div>
                 <div className="col">
                   <TextField id="year" type="text" label="Year of Production (e.g. 2017)"
-                             value={demo.year} onChange={this.onFieldChange.bind(this, 'year')}/>
+                             value={demo.year} onChange={this.onFieldChange.bind(this, 'year')}
+                             hasError={errors['year']}/>
                 </div>
               </div>
               <div className="row align-items-center mt-4">

@@ -13,11 +13,17 @@ class TextField extends React.Component {
       PropTypes.number
     ]),
     onChange: PropTypes.func,
+    hasError: PropTypes.bool,
   };
 
   render() {
+    const containerClasses = [styles.textFieldContainer];
+    if (this.props.hasError) {
+      containerClasses.push(styles.hasError);
+    }
+
     return (
-      <div className={styles.textFieldContainer}>
+      <div className={containerClasses.join(' ')}>
         <input className="form-control" id={this.props.id} type={this.props.type} placeholder={this.props.label}
                value={this.props.value} onChange={this.props.onChange}/>
         <label htmlFor={this.props.id}>{this.props.label}</label>
