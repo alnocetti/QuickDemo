@@ -55,21 +55,16 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, "Nuevo QuickDemo", to, content);
 		
-		
-		
-		
-		
-		//mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/mailOpenTracking?id="+se.getSendId());
-		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://192.168.1.103:8081/mailOpenTracking?id="+se.getSendId());
+		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/mailOpenTracking?id="+se.getSendId());
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
 		mail.personalization.get(0).addSubstitution("-artista-", se.getDemo().getArtist().getArtistName());
 		mail.personalization.get(0).addSubstitution("-nombreDemo-", se.getDemo().getName());
 		mail.personalization.get(0).addSubstitution("-anoComposicion-", se.getDemo().getYear());
-		//mail.personalization.get(0).addSubstitution("-urlDemo-", "http://quickdemo.rarahavis.com/listenTracking?id="+se.getSendId());
-		mail.personalization.get(0).addSubstitution("-urlDemo-", "http://192.168.1.103:8081/listenTracking?id="+se.getSendId());
+		mail.personalization.get(0).addSubstitution("-urlDemo-", "http://quickdemo.rarahavis.com/listenTracking?id="+se.getSendId());
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());
+		logger.info("SG SENDING EMAIL WITH API KEY: ", super.getSendGridKey());
 		Request request = new Request();
 		try {
 			request.setMethod(Method.POST);

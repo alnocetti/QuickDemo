@@ -62,15 +62,13 @@ public class DemoListenedTemplateProcessor extends SendEmailSendGridHelper imple
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from,"Demo Escuchado", to, content);
 		
-		
-		
-		
-		
 		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());
+		logger.info("SG SENDING EMAIL WITH API KEY: ", super.getSendGridKey());
+		
 		Request request = new Request();
 		try {
 			request.setMethod(Method.POST);
