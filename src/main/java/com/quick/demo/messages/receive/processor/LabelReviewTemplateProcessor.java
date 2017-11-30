@@ -53,7 +53,7 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(se.getLabel().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
-		Mail mail = new Mail(from, "Nuevo QuickDemo", to, content);
+		Mail mail = new Mail(from, "New QuickDemo uploaded for you", to, content);
 
 		mail.personalization.get(0).addSubstitution("-urlImagen-",
 				"http://quickdemo.rarahavis.com/mailOpenTracking?id=" + se.getSendId());

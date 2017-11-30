@@ -61,7 +61,7 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(demo.getArtistEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
-		Mail mail = new Mail(from, demoSendedEmail.getSubjet(), to, content);
+		Mail mail = new Mail(from, "Your Demo was sended", to, content);
 		String sellos="";
 		for(String labelName : demo.getLabelsNames()){
 			sellos=sellos+"<li>"+labelName+"</li>";

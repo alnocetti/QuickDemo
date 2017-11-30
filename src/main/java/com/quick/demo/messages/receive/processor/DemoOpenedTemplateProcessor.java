@@ -61,7 +61,7 @@ public class DemoOpenedTemplateProcessor extends SendEmailSendGridHelper impleme
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(se.getDemo().getArtist().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
-		Mail mail = new Mail(from, "El demo ha sido visto", to, content);
+		Mail mail = new Mail(from, "Demo Opened from "+se.getLabel().getName(), to, content);
 
 		mail.personalization.get(0).addSubstitution("-urlImagen-",
 				"http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");

@@ -62,7 +62,7 @@ public class DemoListenedTemplateProcessor extends SendEmailSendGridHelper imple
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(se.getDemo().getArtist().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
-		Mail mail = new Mail(from, "Demo Escuchado", to, content);
+		Mail mail = new Mail(from, "Demo Listened", to, content);
 
 		mail.personalization.get(0).addSubstitution("-urlImagen-",
 				"http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
