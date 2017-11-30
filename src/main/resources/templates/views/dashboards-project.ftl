@@ -425,7 +425,7 @@ $("#demos-tab-btn").removeClass("active");
 
 $(function(){
 
-    $.post("/api/shared",{},function(data){
+    $.get("/api/shared",function(data){
         sendeds=data;
 
         cargarDatos();
@@ -448,20 +448,34 @@ var cantEscuchados=0;
 
         var tr = $("<tr/>")
 
+
+        var statusStyle="";
+        if(element.status=="PENDING")
+            statusStyle="badge-warning";
+          if(element.status=="DELIVERED")
+            statusStyle="badge-info";
+          if(element.status=="REFUSED")
+            statusStyle="badge-danger";
+          if(element.status=="OPENED")
+            statusStyle="badge-primary";
+        if(element.status=="LISTENED")
+            statusStyle="badge-success";
+
+
         tr.append("<td>"+element.artist+"</td>");
         tr.append("<td>"+element.demoName+"</td>");
         tr.append("<td>"+element.label+"</td>");
         tr.append("<td>"+element.genre+"</td>");
         tr.append("<td>"+element.creationDate+"</td>");
-        tr.append("<td>"+element.status+"</td>");
-        tr.append("<td><a href='https://cdn.filestackcontent.com/"+element.pathId+"'><i class='icon-bookmark-music'></i></a></td>");
+        tr.append("<td><span class='badge "+statusStyle+"'>"+element.status+"</span></td>");
+        tr.append("<td><a target='_blank' href='https://cdn.filestackcontent.com/"+element.pathId+"'><i class='icon-bookmark-music'></i></a></td>");
         $("#cuerpoTabla").append(tr);
     });
 
 
 
-    $("#demosSubidos").html(demos.lenght);
-    $("#mailsEnviados").html(sendeds.lenght);
+    $("#demosSubidos").html(demos.length);
+    $("#mailsEnviados").html(sendeds.length);
     $("#mailsAbiertos").html(cantAbiertos);
     $("#demosEscuchados").html(cantEscuchados);
 
