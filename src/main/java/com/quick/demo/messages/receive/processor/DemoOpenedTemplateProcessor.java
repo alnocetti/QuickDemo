@@ -68,9 +68,8 @@ public class DemoOpenedTemplateProcessor extends SendEmailSendGridHelper impleme
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
 		mail.setTemplateId(this.getTemplateId());
 
-		SendGrid sg = new SendGrid(super.getSendGridKey());
-		System.out.println(this.getSendGridKey());
-		logger.info("SG SENDING EMAIL WITH API KEY: ", this.getSendGridKey());
+		SendGrid sg = new SendGrid(this.getSendGridKey());
+		System.out.println("SG SENDING EMAIL WITH API KEY:" + this.getSendGridKey());
 
 		Request request = new Request();
 		try {

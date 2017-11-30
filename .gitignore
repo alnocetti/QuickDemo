@@ -35,3 +35,4 @@ bin/
 **/bin/library.jar
 /target/
 /bin/
+/quickdemo.log
