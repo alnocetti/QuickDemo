@@ -469,29 +469,19 @@ var cantEscuchados=0;
         tr.append("<td>"+element.creationDate+"</td>");
         tr.append("<td><span class='badge "+statusStyle+"'>"+element.status+"</span></td>");
         tr.append("<td><a target='_blank' href='https://cdn.filestackcontent.com/"+element.pathId+"'><i class='icon-bookmark-music'></i></a></td>");
-        $("#cuerpoTabla").append(tr);
+        $("#cuerpoTabla").prepend(tr);
     });
 
-
-
-    $("#demosSubidos").html(demos.length);
+    $("#demosSubidos").html(demos.length-1);
     $("#mailsEnviados").html(sendeds.length);
     $("#mailsAbiertos").html(cantAbiertos);
     $("#demosEscuchados").html(cantEscuchados);
 
-
 }
 
-
-
-
 </script>
-
-
         </div>
     </div>
-   
-
 </#if>
 	<#if section = "scripts">
 		
