@@ -40,74 +40,55 @@ public class IndexWebController {
 	private SendService sendService;
 	@Autowired
 	private JmsMessagingTemplate jmsMessagingTemplate;
-	
-	@RequestMapping("/")
-    public String home() {
-        return index();
-    }
-	
-    public String index() {
-        return "index.html";
-    }
 
-	@RequestMapping("/demo")
-	public String demo() {
-		return "/views/demo";
+	@RequestMapping("/")
+	public String home() {
+		return index();
 	}
 
-	@RequestMapping("/dashboards-project")
+	public String index() {
+		return "index.html";
+	}
+
+	@RequestMapping("/dashboard")
 	public String dashboard() {
 		return "/views/dashboards-project";
-	}
-
-	@RequestMapping("/users")
-	public String users() {
-		return "/views/users";
-	}
-
-	@RequestMapping("/profile")
-	public String profile() {
-		return "/views/profile";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/mailOpenTracking", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> mailOpenTracking(Long id) throws IOException {
-		
-		
-		SendEntity send=sendService.findOne(id);
+		SendEntity send = sendService.findOne(id);
 		send.setStatus(Status.OPENED);
 		sendService.update(send);
-		
+
 		DemoOpenedEmail demoEmail = new DemoOpenedEmail(send.getSendId());
 		this.jmsMessagingTemplate.convertAndSend(MessageReceiver.DEMO_OPENED_QUEUE, demoEmail);
-		
+
 		URL r = this.getClass().getResource("/");
 		String decoded = URLDecoder.decode(r.getFile(), "UTF-8");
 
 		if (decoded.startsWith("/")) {
 			decoded = decoded.replaceFirst("/", "");
 		}
-		File in = new File(decoded,"/static/Images/ImagenMailTracker.jpg");
+		File in = new File(decoded, "/static/Images/ImagenMailTracker.jpg");
 		InputStream strim = new FileInputStream(in);
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
 
 		return new ResponseEntity<byte[]>(IOUtils.toByteArray(strim), headers, HttpStatus.CREATED);
-
 	}
 
 	@RequestMapping("/listenTracking")
 	public String listenTracking(Long id) {
-		
-		SendEntity send=sendService.findOne(id);
+		SendEntity send = sendService.findOne(id);
 		send.setStatus(Status.LISTENED);
 		sendService.update(send);
-		
+
 		DemoListenedEmail demoEmail = new DemoListenedEmail(send.getSendId());
 		this.jmsMessagingTemplate.convertAndSend(MessageReceiver.DEMO_LISTENED_QUEUE, demoEmail);
-		
-		return  "redirect:https://cdn.filestackcontent.com/"+send.getDemo().getFilepath();
+
+		return "redirect:https://cdn.filestackcontent.com/" + send.getDemo().getFilepath();
 	}
 
 }

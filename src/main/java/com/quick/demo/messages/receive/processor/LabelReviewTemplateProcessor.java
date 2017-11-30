@@ -32,11 +32,11 @@ import com.sendgrid.SendGrid;
  */
 @Component
 @Scope("singleton")
-public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate{
+public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Value("${sendgrid.template.labelreview}")
-    private String templateId;
+	private String templateId;
 	@Autowired
 	private SendService sendService;
 
@@ -47,24 +47,28 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 
 	@Override
 	public void send(EmailTemplate email) throws IOException {
-		LabelReviewEmail labelReviewEmail= (LabelReviewEmail)email; 
+		LabelReviewEmail labelReviewEmail = (LabelReviewEmail) email;
 		SendEntity se = sendService.findOne(labelReviewEmail.getSendId());
-		
+
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(se.getLabel().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, "Nuevo QuickDemo", to, content);
-		
-		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/mailOpenTracking?id="+se.getSendId());
+
+		mail.personalization.get(0).addSubstitution("-urlImagen-",
+				"http://quickdemo.rarahavis.com/mailOpenTracking?id=" + se.getSendId());
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
 		mail.personalization.get(0).addSubstitution("-artista-", se.getDemo().getArtist().getArtistName());
 		mail.personalization.get(0).addSubstitution("-nombreDemo-", se.getDemo().getName());
 		mail.personalization.get(0).addSubstitution("-anoComposicion-", se.getDemo().getYear());
-		mail.personalization.get(0).addSubstitution("-urlDemo-", "http://quickdemo.rarahavis.com/listenTracking?id="+se.getSendId());
+		mail.personalization.get(0).addSubstitution("-urlDemo-",
+				"http://quickdemo.rarahavis.com/listenTracking?id=" + se.getSendId());
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());
-		logger.info("SG SENDING EMAIL WITH API KEY: ", super.getSendGridKey());
+		System.out.println(this.getSendGridKey());
+		logger.info("SG SENDING EMAIL WITH API KEY: ", this.getSendGridKey());
+		
 		Request request = new Request();
 		try {
 			request.setMethod(Method.POST);
@@ -74,7 +78,7 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 			logger.debug("Response status code: ", response.getStatusCode());
 			logger.debug("Response body: ", response.getBody());
 			logger.debug("Response headers: ", response.getHeaders());
-			if (response.getStatusCode()==202){
+			if (response.getStatusCode() == 202) {
 				SendEntity send = sendService.findOne(labelReviewEmail.getSendId());
 				send.setStatus(com.quick.demo.db.entity.Status.DELIVERED);
 				sendService.update(send);
@@ -84,5 +88,5 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 			throw ex;
 		}
 	}
-	
+
 }

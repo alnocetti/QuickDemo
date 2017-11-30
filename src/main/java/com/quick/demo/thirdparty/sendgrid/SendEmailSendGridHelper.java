@@ -19,20 +19,6 @@ public class SendEmailSendGridHelper {
     private String emailFrom;
 
 	/**
-	 * @return the sendGridKey
-	 */
-	public String getSendGridKey() {
-		return sendGridKey;
-	}
-
-	/**
-	 * @param sendGridKey the sendGridKey to set
-	 */
-	public void setSendGridKey(String sendGridKey) {
-		this.sendGridKey = sendGridKey;
-	}
-
-	/**
 	 * @return the emailFrom
 	 */
 	public String getEmailFrom() {
@@ -44,6 +30,20 @@ public class SendEmailSendGridHelper {
 	 */
 	public void setEmailFrom(String emailFrom) {
 		this.emailFrom = emailFrom;
+	}
+
+	/**
+	 * @return the sendGridKey
+	 */
+	public String getSendGridKey() {
+		return sendGridKey;
+	}
+
+	/**
+	 * @param sendGridKey the sendGridKey to set
+	 */
+	public void setSendGridKey(String sendGridKey) {
+		this.sendGridKey = sendGridKey;
 	}
 	
 }

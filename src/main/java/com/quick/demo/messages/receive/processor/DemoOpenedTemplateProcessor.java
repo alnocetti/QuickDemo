@@ -35,13 +35,15 @@ import com.sendgrid.SendGrid;
 public class DemoOpenedTemplateProcessor extends SendEmailSendGridHelper implements SendGridTemplate {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Value("${sendgrid.template.demoopened}")
-    private String templateId;
+	private String templateId;
 	@Autowired
 	private SendService sendService;
+
 	/**
-	 * @param templateId the templateId to set
+	 * @param templateId
+	 *            the templateId to set
 	 */
 	public void setTemplateId(String templateId) {
 		this.templateId = templateId;
@@ -51,23 +53,25 @@ public class DemoOpenedTemplateProcessor extends SendEmailSendGridHelper impleme
 	public String getTemplateId() {
 		return templateId;
 	}
-	
+
 	@Override
 	public void send(EmailTemplate email) throws IOException {
-		DemoOpenedEmail demoOpenedEmail= (DemoOpenedEmail)email; 
+		DemoOpenedEmail demoOpenedEmail = (DemoOpenedEmail) email;
 		SendEntity se = sendService.findOne(demoOpenedEmail.getSendId());
 		Email from = new Email(this.getEmailFrom());
 		Email to = new Email(se.getDemo().getArtist().getEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, "El demo ha sido visto", to, content);
-		
-		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
+
+		mail.personalization.get(0).addSubstitution("-urlImagen-",
+				"http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
 		mail.personalization.get(0).addSubstitution("-sello-", se.getLabel().getName());
 		mail.setTemplateId(this.getTemplateId());
 
 		SendGrid sg = new SendGrid(super.getSendGridKey());
-		logger.info("SG SENDING EMAIL WITH API KEY: ", super.getSendGridKey());
-		
+		System.out.println(this.getSendGridKey());
+		logger.info("SG SENDING EMAIL WITH API KEY: ", this.getSendGridKey());
+
 		Request request = new Request();
 		try {
 			request.setMethod(Method.POST);
@@ -77,14 +81,14 @@ public class DemoOpenedTemplateProcessor extends SendEmailSendGridHelper impleme
 			logger.debug("Response status code: ", response.getStatusCode());
 			logger.debug("Response body: ", response.getBody());
 			logger.debug("Response headers: ", response.getHeaders());
-			if (response.getStatusCode()==202){
+			if (response.getStatusCode() == 202) {
 				logger.info("email was sucesfully sended");
-				
+
 			}
 		} catch (IOException ex) {
 			logger.error("Error ocurred when the system sending email to label: ", ex.getMessage());
 			throw ex;
 		}
 	}
-	
+
 }
