@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,5 +31,8 @@ public interface SendRepository  extends JpaRepository<SendEntity, Long>{
 	 */
 	@Query("FROM SendEntity s WHERE s.status = 'PENDING'")
 	public List<SendEntity> pendings();
+
+	@Query("FROM SendEntity s WHERE s.demo.demoId = :demoId")
+	public List<SendEntity> findOneByDemoId(@Param("demoId") Long demoId);
 
 }

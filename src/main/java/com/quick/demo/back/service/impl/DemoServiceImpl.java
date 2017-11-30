@@ -12,6 +12,7 @@ import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.db.entity.dto.Demo;
 import com.quick.demo.db.entity.dto.PendingDemo;
 import com.quick.demo.db.repository.DemoRepository;
+import com.quick.demo.db.repository.SendRepository;
 
 /**
  * 
@@ -23,6 +24,8 @@ public class DemoServiceImpl implements DemoService {
 
 	@Autowired
 	private DemoRepository demoRepository;
+	@Autowired
+	private SendRepository sendRepository;
 
 	@Override
 	public void deleteById(Long id) {
@@ -34,7 +37,8 @@ public class DemoServiceImpl implements DemoService {
 		DemoEntity demoentity = demoRepository.findOne(id);
 		Demo demo = new Demo(demoentity);
 		List<Long> sendersIds = new ArrayList<Long>();
-		for (SendEntity e : demoentity.getSenders()){
+		List<SendEntity> senders = sendRepository.findOneByDemoId(demoentity.getDemoId());
+		for (SendEntity e : senders){
 			sendersIds.add(e.getSendId());
 			demo.setSenders(sendersIds);
 		}
@@ -57,7 +61,8 @@ public class DemoServiceImpl implements DemoService {
 		for (DemoEntity demoentity : demoRepository.undeliveryDemos()){
 			Demo demo = new Demo(demoentity);
 			List<Long> sendersIds = new ArrayList<Long>();
-			for (SendEntity e : demoentity.getSenders()){
+			List<SendEntity> senders = sendRepository.findOneByDemoId(demoentity.getDemoId());
+			for (SendEntity e : senders){
 				sendersIds.add(e.getSendId());
 				demo.setSenders(sendersIds);
 			}
@@ -72,7 +77,8 @@ public class DemoServiceImpl implements DemoService {
 		PendingDemo pendingDemo = new PendingDemo();
 		pendingDemo.setArtistEmail(demoEntity.getArtist().getEmail());
 		List<String> labels = new ArrayList<String>();
-		for (SendEntity sendEntity : demoEntity.getSenders()){
+		List<SendEntity> senders = sendRepository.findOneByDemoId(demoEntity.getDemoId());
+		for (SendEntity sendEntity : senders){
 			labels.add(sendEntity.getLabel().getName());
 		}
 		pendingDemo.setLabelsNames(labels);
