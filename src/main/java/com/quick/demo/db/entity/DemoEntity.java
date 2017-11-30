@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +50,7 @@ public class DemoEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false, length = 19)
 	private Date creationDate;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="demoId", referencedColumnName="demoId")
 	private List<SendEntity> senders;
 	@ManyToOne(cascade=CascadeType.ALL)

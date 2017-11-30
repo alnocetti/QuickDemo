@@ -13,8 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.quick.demo.back.service.DemoService;
-import com.quick.demo.db.entity.DemoEntity;
-import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.PendingDemo;
 import com.quick.demo.messages.bean.DemoSendedEmail;
 import com.quick.demo.messages.bean.EmailTemplate;
 import com.quick.demo.thirdparty.sendgrid.SendEmailSendGridHelper;
@@ -58,14 +57,14 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 	@Override
 	public void send(EmailTemplate email) throws IOException {
 		DemoSendedEmail demoSendedEmail= (DemoSendedEmail)email; 
-		DemoEntity demo = demoService.findOne(demoSendedEmail.getIdDemo());
+		PendingDemo demo = demoService.findPendingDemo(demoSendedEmail.getIdDemo());
 		Email from = new Email(this.getEmailFrom());
-		Email to = new Email(demo.getArtist().getEmail());
+		Email to = new Email(demo.getArtistEmail());
 		Content content = new Content("text/html", "I'm replacing the <strong>body tag</strong>");
 		Mail mail = new Mail(from, demoSendedEmail.getSubjet(), to, content);
 		String sellos="";
-		for(SendEntity se : demo.getSenders()){
-			sellos=sellos+"<li>"+se.getLabel().getName()+"</li>";
+		for(String labelName : demo.getLabelsNames()){
+			sellos=sellos+"<li>"+labelName+"</li>";
 		}
 		mail.personalization.get(0).addSubstitution("-urlImagen-", "http://quickdemo.rarahavis.com/Images/ImagenMailTracker.jpg");
 		mail.personalization.get(0).addSubstitution("-sellos-", sellos);

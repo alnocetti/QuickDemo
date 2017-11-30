@@ -10,8 +10,14 @@ import com.quick.demo.back.service.DemoService;
 import com.quick.demo.db.entity.DemoEntity;
 import com.quick.demo.db.entity.SendEntity;
 import com.quick.demo.db.entity.dto.Demo;
+import com.quick.demo.db.entity.dto.PendingDemo;
 import com.quick.demo.db.repository.DemoRepository;
 
+/**
+ * 
+ * @author cristianhuichaqueo
+ *
+ */
 @Service
 public class DemoServiceImpl implements DemoService {
 
@@ -24,8 +30,15 @@ public class DemoServiceImpl implements DemoService {
 	}
 
 	@Override
-	public DemoEntity findOne(Long id) {
-		return demoRepository.findOne(id);
+	public Demo findOne(Long id) {
+		DemoEntity demoentity = demoRepository.findOne(id);
+		Demo demo = new Demo(demoentity);
+		List<Long> sendersIds = new ArrayList<Long>();
+		for (SendEntity e : demoentity.getSenders()){
+			sendersIds.add(e.getSendId());
+			demo.setSenders(sendersIds);
+		}
+		return demo;
 	}
 
 	@Override
@@ -51,6 +64,19 @@ public class DemoServiceImpl implements DemoService {
 			demos.add(demo);
 		}
 		return demos;
+	}
+
+	@Override
+	public PendingDemo findPendingDemo(Long idDemo) {
+		DemoEntity demoEntity = demoRepository.findOne(idDemo);
+		PendingDemo pendingDemo = new PendingDemo();
+		pendingDemo.setArtistEmail(demoEntity.getArtist().getEmail());
+		List<String> labels = new ArrayList<String>();
+		for (SendEntity sendEntity : demoEntity.getSenders()){
+			labels.add(sendEntity.getLabel().getName());
+		}
+		pendingDemo.setLabelsNames(labels);
+		return pendingDemo;
 	}
 
 }

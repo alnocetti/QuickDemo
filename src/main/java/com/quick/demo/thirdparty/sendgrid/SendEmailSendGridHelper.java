@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class SendEmailSendGridHelper {
 
-	private static final String SENDGRID_API_KEY = "SENDGRID_API_KEY";
+	@Value("${sendgrid.key}")
+	private String sendGridKey;
 	@Value("${sendgrid.emailfrom}")
     private String emailFrom;
 
@@ -19,7 +20,14 @@ public class SendEmailSendGridHelper {
 	 * @return the sendGridKey
 	 */
 	public String getSendGridKey() {
-		return System.getenv(SendEmailSendGridHelper.SENDGRID_API_KEY);
+		return sendGridKey;
+	}
+
+	/**
+	 * @param sendGridKey the sendGridKey to set
+	 */
+	public void setSendGridKey(String sendGridKey) {
+		this.sendGridKey = sendGridKey;
 	}
 
 	/**

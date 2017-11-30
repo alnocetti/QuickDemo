@@ -30,5 +30,5 @@ public interface SendRepository  extends JpaRepository<SendEntity, Long>{
 	 */
 	@Query("FROM SendEntity s WHERE s.status = 'PENDING'")
 	public List<SendEntity> pendings();
-	
+
 }
