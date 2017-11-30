@@ -3,7 +3,10 @@
  */
 package com.quick.demo.back.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,11 +66,20 @@ public class SendServiceImpl implements SendService {
 
 	@Override
 	public List<SharedDemos> allSharedDemos() {
+		SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
 		List<SharedDemos> all = new ArrayList<SharedDemos>();
 		for (SendEntity sendEntity : sendRepository.findAll()){
 			SharedDemos send = new SharedDemos();
 			send.setArtist(sendEntity.getDemo().getArtist().getArtistName());
-			send.setCreationDate(sendEntity.getDemo().getCreationDate().toString());
+			String strDate = sm.format(sendEntity.getDemo().getCreationDate());
+			Date dt = null;
+			try {
+				dt = sm.parse(strDate);
+			} catch (ParseException e) {
+				// nothing to do
+			}
+			send.setCreationDate(dt.toString());
+			send.setDemoName(sendEntity.getDemo().getName());
 			send.setGenre(sendEntity.getDemo().getGenre().getName());
 			send.setPathId(sendEntity.getDemo().getFilepath());
 			send.setStatus(sendEntity.getStatus().toString());

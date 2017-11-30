@@ -42,9 +42,13 @@ public class IndexWebController {
 	private JmsMessagingTemplate jmsMessagingTemplate;
 	
 	@RequestMapping("/")
-	public String home() {
-		return dashboard();
-	}
+    public String home() {
+        return index();
+    }
+	
+    public String index() {
+        return "index.html";
+    }
 
 	@RequestMapping("/demo")
 	public String demo() {

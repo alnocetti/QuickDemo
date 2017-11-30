@@ -34,6 +34,8 @@ public class Demo implements Serializable{
 		this.setName(demo.getName());
 		this.setYear(demo.getYear());
 		this.setGenreId(demo.getDemoId());
+		this.setDemoId(demo.getDemoId());
+		this.setFileId(demo.getFilepath());
 	}
 
 	/**

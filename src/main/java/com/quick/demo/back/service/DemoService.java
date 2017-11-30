@@ -6,6 +6,7 @@ package com.quick.demo.back.service;
 import java.util.List;
 
 import com.quick.demo.db.entity.DemoEntity;
+import com.quick.demo.db.entity.dto.Demo;
 
 /**
  * @author cristianhuichaqueo
@@ -21,6 +22,6 @@ public interface DemoService {
 
 	public void createDemo(DemoEntity demo);
 
-	public List<DemoEntity> undeliveryDemos();
+	public List<Demo> undeliveryDemos();
 
 }

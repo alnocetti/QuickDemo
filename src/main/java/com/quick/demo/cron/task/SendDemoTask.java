@@ -14,8 +14,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.quick.demo.back.service.DemoService;
-import com.quick.demo.db.entity.DemoEntity;
+import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.Demo;
 import com.quick.demo.messages.bean.LabelReviewEmail;
 import com.quick.demo.messages.receive.MessageReceiver;
 
@@ -33,15 +34,18 @@ public class SendDemoTask {
 	private JmsMessagingTemplate jmsMessagingTemplate;
 	@Autowired
 	private DemoService demoService;
+	@Autowired
+	private SendService sendService;
 
 	@Scheduled(fixedRate = 55000)
 	public void scheduleSearchUndeliveryDemos() {
 		log.info("The time is now {}", dateFormat.format(new Date()));
 		log.info("Looking for some demo to send {}", dateFormat.format(new Date()));
-		for (DemoEntity demo : demoService.undeliveryDemos()) {
-			for (SendEntity sendEntity : demo.getSenders()){
+		for (Demo demo : demoService.undeliveryDemos()) {
+			for (Long sendId : demo.getSenders()){
+				SendEntity sendEntity = sendService.findOne(sendId);
 				LabelReviewEmail labelEmail = new LabelReviewEmail(sendEntity.getLabel().getEmail());
-				labelEmail.setSendId(sendEntity.getSendId());
+				labelEmail.setSendId(sendId);
 				this.jmsMessagingTemplate.convertAndSend(MessageReceiver.LABEL_REVIEW_QUEUE, labelEmail);
 			}
 		}
