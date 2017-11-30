@@ -6,6 +6,7 @@ package com.quick.demo.back.service;
 import java.util.List;
 
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.SharedDemos;
 
 /**
  * @author cristianhuichaqueo
@@ -22,5 +23,7 @@ public interface SendService {
 	public void createSend(SendEntity send);
 	
 	public void update(SendEntity send);
+
+	public List<SharedDemos> allSharedDemos();
 
 }

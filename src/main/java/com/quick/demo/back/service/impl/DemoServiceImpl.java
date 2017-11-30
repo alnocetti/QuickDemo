@@ -39,5 +39,5 @@ public class DemoServiceImpl implements DemoService {
 	public List<DemoEntity> undeliveryDemos() {
 		return demoRepository.undeliveryDemos();
 	}
-	
+
 }
