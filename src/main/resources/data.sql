@@ -1,14 +1,14 @@
 
-INSERT INTO label (name, email, creation_date) VALUES ('Hot Creations', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Mother Recordings', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('DIRTYBIRD', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Sola', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Solid Grooves Records', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Pryda Recordings', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('ELEVATE', 'cristianhuichaqueo@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Relief', 'alnocetti@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Hot Creations', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Mother Recordings', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('DIRTYBIRD', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Sola', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Solid Grooves Records', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Pryda Recordings', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('ELEVATE', 'eaiannicelli@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Relief', 'eaiannicelli@gmail.com', now());
 INSERT INTO label (name, email, creation_date) VALUES ('Defected', 'eaiannicelli@gmail.com', now());
-INSERT INTO label (name, email, creation_date) VALUES ('Watergate Records', 'nkuglien@gmail.com', now());
+INSERT INTO label (name, email, creation_date) VALUES ('Watergate Records', 'eaiannicelli@gmail.com', now());
 
 INSERT INTO genre (name, creation_date) VALUES ('Big Room', now());
 INSERT INTO genre (name, creation_date) VALUES ('Breaks', now());
