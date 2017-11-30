@@ -65,8 +65,8 @@ public class LabelReviewTemplateProcessor extends SendEmailSendGridHelper implem
 				"http://quickdemo.rarahavis.com/listenTracking?id=" + se.getSendId());
 		mail.setTemplateId(this.getTemplateId());
 
-		SendGrid sg = new SendGrid(this.getSendGridKey());
 		System.out.println("SG SENDING EMAIL WITH API KEY:" + this.getSendGridKey());
+		SendGrid sg = new SendGrid(this.getSendGridKey());
 		
 		Request request = new Request();
 		try {

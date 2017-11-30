@@ -70,8 +70,8 @@ public class DemoSendedTemplateProcessor extends SendEmailSendGridHelper impleme
 		mail.personalization.get(0).addSubstitution("-sellos-", sellos);
 		mail.setTemplateId(this.getTemplateId());
 
-		SendGrid sg = new SendGrid(this.getSendGridKey());
-		System.out.println("SG SENDING EMAIL WITH API KEY:" + this.getSendGridKey());		
+		System.out.println("SG SENDING EMAIL WITH API KEY:" + this.getSendGridKey());
+		SendGrid sg = new SendGrid(this.getSendGridKey());		
 
 		Request request = new Request();
 		try {
