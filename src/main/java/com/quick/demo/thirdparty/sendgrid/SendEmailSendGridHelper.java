@@ -4,11 +4,13 @@
 package com.quick.demo.thirdparty.sendgrid;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * @author huicha
  *
  */
+@Component
 public class SendEmailSendGridHelper {
 
 	@Value("${sendgrid.key}")
