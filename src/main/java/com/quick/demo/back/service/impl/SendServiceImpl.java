@@ -3,6 +3,7 @@
  */
 package com.quick.demo.back.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.quick.demo.back.service.SendService;
 import com.quick.demo.db.entity.SendEntity;
+import com.quick.demo.db.entity.dto.SharedDemos;
 import com.quick.demo.db.repository.SendRepository;
 
 /**
@@ -57,6 +59,23 @@ public class SendServiceImpl implements SendService {
 	@Override
 	public void update(SendEntity sendEntity) {
 		sendRepository.saveAndFlush(sendEntity);
+	}
+
+	@Override
+	public List<SharedDemos> allSharedDemos() {
+		List<SharedDemos> all = new ArrayList<SharedDemos>();
+		for (SendEntity sendEntity : sendRepository.findAll()){
+			SharedDemos send = new SharedDemos();
+			send.setArtist(sendEntity.getDemo().getArtist().getArtistName());
+			send.setCreationDate(sendEntity.getDemo().getCreationDate().toString());
+			send.setGenre(sendEntity.getDemo().getGenre().getName());
+			send.setPathId(sendEntity.getDemo().getFilepath());
+			send.setStatus(sendEntity.getStatus().toString());
+			send.setDemoId(sendEntity.getDemo().getDemoId());
+			send.setLabel(sendEntity.getLabel().getName());
+			all.add(send);
+		}
+		return all;
 	}
 
 }
