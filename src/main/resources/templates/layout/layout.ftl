@@ -24,8 +24,7 @@
         <!-- PNotify -->
         <link type="text/css" rel="stylesheet" href="/assets/vendor/pnotify/pnotify.custom.min.css">
 
-        <!-- Nvd3 - D3 Charts -->
-        <link type="text/css" rel="stylesheet" href="/assets/vendor/nvd3/build/nv.d3.min.css"/>
+       
 
         <!-- Perfect Scrollbar -->
         <link type="text/css" rel="stylesheet" href="/assets/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css"/>
@@ -36,13 +35,19 @@
         <!-- Main CSS -->
         <link type="text/css" rel="stylesheet" href="/assets/css/main.css">
         <!-- / STYLESHEETS -->
+       
+
+ <!-- jQuery -->
+        <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+<!-- Popper.js -->
+        <script type="text/javascript" src="/assets/vendor/popper.js/index.js"></script>
         <!-- Bootstrap -->
         <script type="text/javascript" src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
-        <!-- Popper.js -->
-        <script type="text/javascript" src="/assets/vendor/popper.js/index.js"></script>
+        
         <!-- Nvd3 - D3 Charts -->
         <script type="text/javascript" src="/assets/vendor/d3/d3.min.js"></script>
-        <script type="text/javascript" src="/assets/vendor/nvd3/build/nv.d3.min.js"></script>
+     
 
         <!-- Data tables -->
         <script type="text/javascript" src="/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -59,8 +64,7 @@
         <script type="text/javascript" src="/assets/js/main.js"></script>	
          <!-- JAVASCRIPT -->
 
-        <!-- jQuery -->
-        <script type="text/javascript" src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+       
 
         <!-- Mobile Detect -->
         <script type="text/javascript" src="/assets/vendor/mobile-detect/mobile-detect.min.js"></script>
@@ -92,58 +96,8 @@
         	<li class="subheader">
         		<span>Dashboard</span>
 			</li>
-			<li class="nav-item" role="tab" id="heading-dashboards">
-			    <a class="nav-link ripple with-arrow collapsed"
-			       data-toggle="collapse"
-			       data-target="#collapse-dashboards"
-			       href="/dashboards-project"
-			       aria-expanded="false"
-			       aria-controls="collapse-dashboards">
-			        <i class="icon s-4 icon-tile-four"></i>
-			        <span>Dashboards</span>
-			    </a>
-    <ul id="collapse-dashboards"
-        class="collapse"
-        role="tabpanel"
-        aria-labelledby="heading-dashboards"
-        data-children=".nav-item">
-<li class="nav-item">
-    <a class="nav-link ripple " href="dashboards-project.html"
-       data-page-url="/demo">
-        
-        <span>Project Dashboard</span>
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link ripple " href="dashboards-server.html"
-       data-page-url="/demo">
-        
-        <span>Server</span>
-    </a>
-</li>
-    </ul>
-</li>
-<li class="nav-item">
-    <a class="nav-link ripple" href="demo"
-       data-page-url="/demo">
-        <i class="icon s-4 icon-folder"></i>
-        <span>Demos</span>
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link ripple" href="cover"
-       data-page-url="/covers">
-        <i class="icon s-4 icon-folder"></i>
-        <span>Covers</span>
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link ripple" href="users.html"
-       data-page-url="/demo">
-        <i class="icon s-4 icon-account-box"></i>
-        <span>Usuarios</span>
-    </a>
-</li>
+			
+   
         </ul>
     </div>
 </div>
